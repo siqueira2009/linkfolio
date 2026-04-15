@@ -1,0 +1,282 @@
+@media screen and (max-width: 350px) {
+    main {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 350px) and (max-width: 450px) {
+    body {
+        padding: 15px;
+    }
+
+    main {
+        width: 100%;
+        gap: 10px;
+    }
+
+    #profile .userIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        aspect-ratio: 1/1;
+        width: 90px;
+
+        margin-bottom: 10px;
+        font-size: 45px;
+        border-radius: 100px;
+        border: 6px currentColor solid;
+        font-weight: 600;
+    }
+
+    #profile .userName {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    #profile .userAt {
+        font-size: 16.5px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    #profile .userBio {
+        font-size: 16px;
+    }
+
+
+    #userStats {
+        width: 100%;
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-around;
+        gap: 5px;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+
+        padding: 10px;
+        
+        border-radius: 12px;
+        border: 1.5px rgba(255,255,255,0.08) solid;
+        background-color: #1c1c28;
+    }
+
+    #userStats .card > h1 {
+        font-weight: 700;
+        font-size: 24px;
+    }
+
+    #userStats .card > p {
+        font-size: 14px;
+    }
+
+    #userSocials .socialMedia i {
+        font-size: 20px;
+    }
+
+    #userSocials .socialMedia p {
+        font-size: 14px
+    }
+    
+    #userLinks {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #userLinks > p {
+        align-self: start;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    #userLinks #linksContainer {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #userLinks .link {
+        width: 100%;
+        gap: 20px;
+        text-decoration: none;
+        border-radius: 12px;
+        border: 1.5px rgba(255,255,255,0.08) solid;
+        background-color: #1c1c28;
+        padding: 10px;
+    }
+
+    #userLinks .linkIcon {
+        font-size: 25px;
+        padding: 5px;
+        border-radius: 12px;
+        background-color: rgba(200,255,87,0.15);
+    }
+
+    #userLinks .linkText {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    #userLinks .linkText .title {
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    #userLinks .linkText .subTitle {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 450px) and (max-width: 600px) {
+    body {
+        padding: 15px;
+    }
+
+    main {
+        width: 100%;
+        gap: 10px;
+    }
+
+    #profile .userIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        aspect-ratio: 1/1;
+        width: 90px;
+
+        margin-bottom: 10px;
+        font-size: 45px;
+        border-radius: 100px;
+        border: 6px currentColor solid;
+        font-weight: 600;
+    }
+
+    #profile .userName {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    #profile .userAt {
+        font-size: 16.5px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    #profile .userBio {
+        font-size: 16px;
+    }
+
+
+    #userStats {
+        width: 100%;
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-around;
+        gap: 5px;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+
+        padding: 10px;
+        
+        border-radius: 12px;
+        border: 1.5px rgba(255,255,255,0.08) solid;
+        background-color: #1c1c28;
+    }
+
+    #userStats .card > h1 {
+        font-weight: 700;
+        font-size: 24px;
+    }
+
+    #userStats .card > p {
+        font-size: 14px;
+    }
+
+    #userLinks {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #userLinks > p {
+        align-self: start;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    #userLinks #linksContainer {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #userLinks .link {
+        width: 100%;
+        gap: 20px;
+        text-decoration: none;
+        border-radius: 12px;
+        border: 1.5px rgba(255,255,255,0.08) solid;
+        background-color: #1c1c28;
+        padding: 10px;
+    }
+
+    #userLinks .linkIcon {
+        font-size: 25px;
+        padding: 5px;
+        border-radius: 12px;
+        background-color: rgba(200,255,87,0.15);
+    }
+
+    #userLinks .linkText {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    #userLinks .linkText .title {
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    #userLinks .linkText .subTitle {
+        font-size: 12px;
+    }
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    body {
+        padding: 15px;
+    }
+
+    main {
+        width: 100%;
+    }
+
+}
+
+@media screen and (min-width: 900px) and (max-width: 1700px) {
+    body {
+        padding: 15px;
+    }
+
+    main {
+        width: 50%;
+    }
+}

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link rel="stylesheet" href="../css/user/user.css">
+    <link rel="stylesheet" href="../css/user/user_responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+    <main>
+        <section id="profile">
+            <h1 class="userIcon"></h1>
+            <h1 class="userName"></h1>
+            <p class="userAt"></p>
+            <h3 class="userBio"></h3>
+        </section>
+
+        <section id="userStats">
+            <article class="card">
+                <h1></h1>
+                <p>cliques</p>
+            </article>
+
+            <article class="card">
+                <h1></h1>
+                <p>links</p>
+            </article>
+
+            <article class="card">
+                <h1></h1>
+                <p>CTR</p>
+            </article>
+        </section>
+
+        <section id="userSocials">
+            <p class="topic">Redes sociais</p>
+            <div id="socialsContainer">
+                <a class="socialMedia" href="#">
+                    <i class="fa-brands fa-square-linkedin" color="#fff" secondColor="#0A66C2"></i>
+                    <p>LinkedIn</p>
+                </a>
+
+                <a class="socialMedia" href="#">
+                    <i class="fa-brands fa-instagram" color="#fff" secondColor="#DD2A7B"></i>
+                    <p>Instagram</p>
+                </a>
+
+                <a class="socialMedia" href="#">
+                    <i class="fa-brands fa-x-twitter" color="#fff" secondColor="#1DA1F2"></i>
+                    <p>X/Twitter</p>
+                </a>
+
+                <a class="socialMedia" href="#">
+                    <i class="fa-brands fa-github" color="#fff" secondColor="#0FBF3E"></i>
+                    <p>GitHub</p>
+                </a>
+
+                <a class="socialMedia" href="#">
+                    <i class="fa-brands fa-youtube" color="#fff" secondColor="red"></i>
+                    <p>YouTube</p>
+                </a>
+
+                <a class="socialMedia" href="#">
+                    <i class="fa-brands fa-discord" color="#fff" secondColor="#5865F2"></i>
+                    <p>Discord</p>
+                </a>
+
+                <a class="socialMedia" href="#">
+                    <i class="fa-brands fa-steam" color="#fff" secondColor="#1387b8"></i>
+                    <p>Steam</p>
+                </a>
+
+                <a class="socialMedia" href="#">
+                    <i class="fa-brands fa-facebook" color="#fff" secondColor="#0866ff"></i>
+                    <p>Facebook</p>
+                </a>
+
+                <a class="socialMedia" href="#">
+                    <i class="fa-brands fa-tiktok" color="#fff" secondColor="#EE1D52"></i>
+                    <p>TikTok</p>
+                </a>
+
+            </div>
+        </section>
+        
+        <section id="userLinks">
+            <p class="topic">Links em destaque</p>
+            <div id="linksContainer">
+                <a class="link" href="#" target="_blank" rel="noopener noreferrer">
+                    <div class="linkIcon"></div>
+                    <div class="linkText">
+                        <h2 class="title"></h2>
+                        <p class="subtitle"></p>
+                    </div>
+                    <i data-lucide="chevron-right"></i>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Importação das bibliotecas -->
+    <script src="../js/user.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

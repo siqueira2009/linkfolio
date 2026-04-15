@@ -1,0 +1,190 @@
+@import url('https://fonts.cdnfonts.com/css/cabinet-grotesk');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+
+    font-family: 'Cabinet Grotesk', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 100dvw;
+    min-height: 100dvh;
+
+    background-color: #0a0a0f;
+
+    padding: 30px;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    align-items: center;
+    gap: 20px;
+
+    width: 28%;
+    height: 95%;
+
+    background-color: transparent;
+}
+
+main form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.steps {
+    width: 100%;
+
+    transition: 1s;
+}
+
+.inputGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+    font-family: 'Segoe UI', sans-serif;
+    margin: 16px 0 16px 0;
+    position: relative;
+}
+
+.inputGroup input {
+    width: 100%;
+    font-size: 100%;
+    padding: 12.8px;
+    outline: none;
+    border: 2px rgba(255,255,255,0.08) solid;
+    background-color: transparent;
+    border-radius: 20px;
+
+    color: white;
+
+    transition: border 0.3s;
+}
+
+.inputGroup label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    padding: 12.8px;
+    margin-left: 8;
+    pointer-events: none;
+    transition: all 0.2s;
+    color: rgb(100, 100, 100);
+}
+
+.inputGroup :is(input:focus, input:valid)~label {
+    transform: translateY(-75%) scale(.9);
+    margin: 0;
+    margin-left: 20.8px;
+    padding: 6.4px;
+    background-color: #0a0a0f;
+}
+
+.inputGroup :is(input:focus, input:valid) {
+    border-color: rgba(255, 255, 255, 0.555);
+}
+
+.icon .iconContent {
+    display: none; 
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    width: 20px;
+    transform: translateY(-50%);
+    color: white;
+    pointer-events: none;
+}
+
+.inputGroup input:focus ~ .icon .iconContent,
+.inputGroup input:valid ~ .icon .iconContent {
+    display: block;
+}
+
+.inputGroup input:focus, 
+.inputGroup input:valid {
+    padding-left: 40px;
+}
+
+
+#colors {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+    height: fit-content;
+    margin: 30px 0px;
+}
+
+#colors .color {
+    aspect-ratio: 1/1;
+    height: 50px;
+    border-radius: 100px;
+    border: 2px solid white;
+    cursor: pointer;
+    
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+#colors .color:hover {
+    scale: 150%;
+}
+
+#colors .color.selected {
+    scale: 150%;
+}
+
+#colors .color#red {
+    background-color: #FF4D4D;
+}
+
+#colors .color#green {
+    background-color: #2ECC71;
+}
+
+#colors .color#blue {
+    background-color: #3498DB;
+}
+
+#colors .color#white {
+    background-color: #FFFFFF;
+}
+
+#colors .color#orange {
+    background-color: #E67E22;
+}
+
+#colors .color#yellow {
+    background-color: #F1C40F;
+}
+
+form button#submit {
+    width: 90%;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 20px;
+    color: white;
+    background-color: #1c1c28;
+    border: 2px rgba(255,255,255,0.08) solid;
+    cursor: pointer;
+
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+form button#submit:hover {
+    width: 100%;
+    border-radius: 50px;
+    background-color: #2a2a3a; 
+}

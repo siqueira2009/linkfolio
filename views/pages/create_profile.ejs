@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Perfil</title>
+    <link rel="stylesheet" href="css/create/create.css">
+</head>
+<body>
+    <main>
+        <form method="post">
+            <section class="steps" id="step1">
+                <div class="inputGroup">
+                    <input name="user" type="text" required="" value="">
+                    <label for="name">Usuário da página</label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="link"></i>
+                    </div>
+                </div>
+    
+                <div class="inputGroup">
+                    <input name="name" type="text" required="" value="">
+                    <label for="name">Seu nome</label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="user"></i>
+                    </div>
+                </div>
+    
+                <div class="inputGroup" style="margin: 0; margin-top: 16px;">
+                    <input name="at" type="text" id="meuInput" required="" value="">
+                    <label for="meuInput">Escolha um @</label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="at-sign"></i>
+                    </div>
+                </div>
+    
+                <input name="color" style="display: none;" type="text" id="colorInput" value="">
+    
+                <section id="colors">
+                    <div class="color" id="red"></div>
+                    <div class="color" id="green"></div>
+                    <div class="color" id="blue"></div>
+                    <div class="color" id="white"></div>
+                    <div class="color" id="orange"></div>
+                    <div class="color" id="yellow"></div>
+                </section>
+            </section>
+
+            <section style="display: none;" class="steps" id="step2">
+
+            </section>
+
+            <button type="button" id="submit" onclick="passStep(event)">Avançar</button>
+        </form>
+    </main>
+
+    <script src="../js/create_profile.js"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
