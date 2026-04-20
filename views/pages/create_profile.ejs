@@ -5,39 +5,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Perfil</title>
     <link rel="stylesheet" href="css/create/create.css">
+    <link rel="stylesheet" href="css/create/create_responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <!-- MENSAGEM PARA QUANDO A TELA É MUITO PEQUENA -->
+    <div id="unavailabe">
+        <h1>Site indisponível!<h1>
+        <h3>🤏 Sua tela é muito pequena<h3>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
     <main>
+        <!-- FORMULÁRIO -->
         <form method="post">
-            <section class="steps" id="step1">
+            <h1 id="formTitle">Escolha sua personalização</h1>
+
+            <!-- ETAPA 1: Informações básicas (nome, usuário e @) -->
+            <section style="display: block;" class="steps" id="step1">
                 <div class="inputGroup">
-                    <input name="user" type="text" required="" value="">
-                    <label for="name">Usuário da página</label>
+                    <input class="required" name="user" type="text" required="" value="">
+                    <label for="user">Usuário da página<span class="required">*</span></label>
                     <div class="icon">
                         <i class="iconContent" data-lucide="link"></i>
                     </div>
                 </div>
     
                 <div class="inputGroup">
-                    <input name="name" type="text" required="" value="">
-                    <label for="name">Seu nome</label>
+                    <input class="required" name="name" type="text" required="" value="">
+                    <label for="name">Seu nome<span class="required">*</span></label>
                     <div class="icon">
                         <i class="iconContent" data-lucide="user"></i>
                     </div>
                 </div>
     
                 <div class="inputGroup" style="margin: 0; margin-top: 16px;">
-                    <input name="at" type="text" id="meuInput" required="" value="">
-                    <label for="meuInput">Escolha um @</label>
+                    <input class="required" name="at" type="text" id="meuInput" required="" value="">
+                    <label for="at">Escolha um @<span class="required">*</span></label>
                     <div class="icon">
                         <i class="iconContent" data-lucide="at-sign"></i>
                     </div>
                 </div>
     
-                <input name="color" style="display: none;" type="text" id="colorInput" value="">
+                <div class="inputGroup requireDeletion">
+                    <input name="color" style="display: none;" type="text" id="colorInput" value="red">
+                </div>
     
                 <section id="colors">
-                    <div class="color" id="red"></div>
+                    <div class="color selected" id="red"></div>
                     <div class="color" id="green"></div>
                     <div class="color" id="blue"></div>
                     <div class="color" id="white"></div>
@@ -46,18 +61,148 @@
                 </section>
             </section>
 
+            <!-- ETAPA 2: Redes sociais -->
             <section style="display: none;" class="steps" id="step2">
+                <div class="inputGroup inputSocial requireDeletion" id="social0">
+                    <input name="instagram" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <label for="instagram">Instagram</label>
+                    <div class="icon">
+                        <i class="iconContent fa-brands fa-instagram"></i>
+                    </div>
+                </div>
+                <div class="inputGroup inputSocial requireDeletion" id="social1">
+                    <input name="linkedin" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <label for="linkedin">LinkedIn</label>
+                    <div class="icon">
+                        <i class="iconContent fa-brands fa-square-linkedin"></i>
+                    </div>
+                </div>
+                <div class="inputGroup inputSocial requireDeletion" id="social2">
+                    <input name="x/twitter" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <label for="x/twitter">X/Twitter</label>
+                    <div class="icon">
+                        <i class="iconContent fa-brands fa-x-twitter"></i>
+                    </div>
+                </div>
+                <div class="inputGroup inputSocial requireDeletion" id="social3">
+                    <input name="github" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <label for="github">GitHub</label>
+                    <div class="icon">
+                        <i class="iconContent fa-brands fa-github"></i>
+                    </div>
+                </div>
+                <div class="inputGroup inputSocial requireDeletion" id="social4">
+                    <input name="youtube" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <label for="youtube">YouTube</label>
+                    <div class="icon">
+                        <i class="iconContent fa-brands fa-youtube"></i>
+                    </div>
+                </div>
+                <div class="inputGroup inputSocial requireDeletion" id="social5">
+                    <input name="discord" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <label for="discord">Discord</label>
+                    <div class="icon">
+                        <i class="iconContent fa-brands fa-discord"></i>
+                    </div>
+                </div>
+                <div class="inputGroup inputSocial requireDeletion" id="social6">
+                    <input name="steam" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <label for="steam">Steam</label>
+                    <div class="icon">
+                        <i class="iconContent fa-brands fa-steam"></i>
+                    </div>
+                </div>
+                <div class="inputGroup inputSocial requireDeletion" id="social7">
+                    <input name="facebook" type="text"value="" placeholder="Digite seu usuário aqui...">
+                    <label for="facebook">Facebook</label>
+                    <div class="icon">
+                        <i class="iconContent fa-brands fa-facebook"></i>
+                    </div>
+                </div>
+                <div class="inputGroup inputSocial requireDeletion" id="social8">
+                    <input name="tiktok" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <label for="tiktok">TikTok</label>
+                    <div class="icon">
+                        <i class="iconContent fa-brands fa-tiktok"></i>
+                    </div>
+                </div>
 
+                <button type="button" id="addSocial">Adicionar rede</button>
             </section>
 
-            <button type="button" id="submit" onclick="passStep(event)">Avançar</button>
+            <!-- ETAPA 3: Links personalizados -->
+            <section style="display: none;" class="steps" id="step3">
+                <div id="customLinks">
+                    <h2 id="nenhumLink" class="nenhumLinkTexts">Nenhum link personalizado adicionado...</h2>
+                    <h3 id="nenhumLinkSub" class="nenhumLinkTexts">Use o botão abaixo para adicionar um!</h3>
+                </div>
+
+                <button type="button" id="openModal">Adicionar link</button>
+            </section>
+
+            <!-- BOTÕES: Avançar/voltar etapa -->
+            <div class="buttonsContainer" id="buttons">
+                <button class="stepsButton" type="button" id="back" disabled="true">Voltar</button>
+                <button class="stepsButton" type="button" id="foward" disabled="true">Avançar</button>
+            </div>
         </form>
+        
+        <!-- TEMPLATE DE LINK PERSONALIZADO -->
+        <div class="inputGroup customLinkGroup" style="display: none;" id="customLinkTemplate">
+            <input name="" type="text" required="" value="" disabled>
+            <label for=""></label>
+            <div class="icon">
+                <span class="iconContent"></span>
+            </div>
+            <div class="removeIcon">
+                <i class="iconContent" data-lucide="x"></i>
+            </div>
+        </div>
+        
+        <!-- MODAL DE LINK PERSONALIZADO -->
+        <dialog>
+            <h1>Adicionar link</h1>
+            
+            <div class="inputGroup">
+                <input class="required" name="user" type="text" required="" value="" id="linkName">
+                <label for="name">Nome do link</label>
+                <div class="icon">
+                    <i class="iconContent" data-lucide="id-card-lanyard"></i>
+                </div>
+            </div>
+            
+            <div class="inputGroup">
+                <input class="required" name="user" type="text" required="" value="" id="linkUrl">
+                <label for="name">URL do link</label>
+                <div class="icon">
+                    <i class="iconContent" data-lucide="link"></i>
+                </div>
+            </div>
+            
+            <div class="inputGroup">
+                <input name="user" type="text" required="" id="linkEmoji" disabled placeholder="Escolha um emoji abaixo...">
+                <label for="name">Emoji escolhido</label>
+                <div class="icon">
+                    <i class="iconContent" data-lucide="chess-knight"></i>
+                </div>
+            </div>
+            
+            <input type="text" id="emoji" style="display: none;">
+            
+            <emoji-picker locale="pt_BR"></emoji-picker>
+            
+            <div class="buttonsContainer" id="linkButtons">
+                <button type="button" id="cancelLink">Cancelar</button>
+                <button type="button" id="addLink" disabled="true">Adicionar</button>
+            </div>
+        </dialog>
     </main>
 
+    <!-- Importação de scripts -->
     <script src="../js/create_profile.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        lucide.createIcons();
-    </script>
+
+    <!-- Importação de bibliotecas -->
+    <script src="https://unpkg.com/lucide@latest"></script> <!-- Ícones Lucide -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script> <!-- Seletor de emojis -->
 </body>
 </html>

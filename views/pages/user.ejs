@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+    <!-- MENSAGEM PARA QUANDO A TELA É MUITO PEQUENA -->
+    <div id="unavailabe">
+        <h1>Site indisponível!<h1>
+        <h3>🤏 Sua tela é muito pequena<h3>
+    </div>
+
     <main>
+        <!-- Seção do perfil (foto, nome, arroba e sobre) -->
         <section id="profile">
             <h1 class="userIcon"></h1>
             <h1 class="userName"></h1>
@@ -17,6 +24,7 @@
             <h3 class="userBio"></h3>
         </section>
 
+        <!-- Seção das estatísticas (cliques, links e CTR) -->
         <section id="userStats">
             <article class="card">
                 <h1></h1>
@@ -34,6 +42,7 @@
             </article>
         </section>
 
+        <!-- Seção das redes sociais -->
         <section id="userSocials">
             <p class="topic">Redes sociais</p>
             <div id="socialsContainer">
@@ -85,6 +94,7 @@
             </div>
         </section>
         
+        <!-- Seção de links personalizados do usuário -->
         <section id="userLinks">
             <p class="topic">Links em destaque</p>
             <div id="linksContainer">
@@ -100,11 +110,10 @@
         </section>
     </main>
 
-    <!-- Importação das bibliotecas -->
+    <!-- Importação de scripts -->
     <script src="../js/user.js"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <script>
-        lucide.createIcons();
-    </script>
+
+    <!-- Importação das bibliotecas -->
+    <script src="https://unpkg.com/lucide@latest"></script>  <!-- Ícones Lucide -->
 </body>
 </html>

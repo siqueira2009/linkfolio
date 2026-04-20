@@ -1,3 +1,5 @@
+/* CONFIGURAÇÕES GLOBAIS */
+
 @import url('https://fonts.cdnfonts.com/css/cabinet-grotesk');
 
 * {
@@ -21,18 +23,74 @@ body {
     padding: 30px;
 }
 
+.buttonsContainer {
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+button {
+    width: 50%;
+    padding: 10px;
+    border-radius: 12px;
+    font-size: 20px;
+    color: white;
+    background-color: #1c1c28;
+    border: 2px rgba(255,255,255,0.08) solid;
+    cursor: pointer;
+
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+button:hover {
+    width: 100%;
+    border-radius: 50px;
+    background-color: #2a2a3a; 
+}
+
+button:disabled {
+    pointer-events: none;
+    opacity: 0.3;
+}
+
+.required {
+    color: #ff4d4d8e;
+}
+
+.steps {
+    width: 100%;
+
+    transition: 1s;
+}
+
+/* SITE INDISPONÍVEL */
+
+#unavailabe {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+/* MAIN */
+
 main {
+    position: relative;
+
     display: flex;
     flex-direction: column;
     justify-content: top;
     align-items: center;
     gap: 20px;
 
-    width: 28%;
+    width: 30%;
     height: 95%;
 
     background-color: transparent;
 }
+
+/* FORMULÁRIO */
 
 main form {
     display: flex;
@@ -40,12 +98,14 @@ main form {
     justify-content: center;
     align-items: center;
     width: 100%;
+    height: 100%;
 }
 
-.steps {
-    width: 100%;
-
-    transition: 1s;
+form #formTitle {
+    color: white;
+    font-size: 40px;
+    margin-bottom: 10px;
+    text-align: center;
 }
 
 .inputGroup {
@@ -70,7 +130,7 @@ main form {
 
     color: white;
 
-    transition: border 0.3s;
+    transition: border 0.3s ;
 }
 
 .inputGroup label {
@@ -84,7 +144,7 @@ main form {
     color: rgb(100, 100, 100);
 }
 
-.inputGroup :is(input:focus, input:valid)~label {
+.inputGroup :is(input:focus, input:valid)~label, .inputGroup :is(input:disabled)~label {
     transform: translateY(-75%) scale(.9);
     margin: 0;
     margin-left: 20.8px;
@@ -108,15 +168,23 @@ main form {
 }
 
 .inputGroup input:focus ~ .icon .iconContent,
-.inputGroup input:valid ~ .icon .iconContent {
+.inputGroup input:valid ~ .icon .iconContent,
+.inputGroup input:disabled ~ .icon .iconContent {
     display: block;
+    right: 0;
 }
 
 .inputGroup input:focus, 
-.inputGroup input:valid {
+.inputGroup input:valid,
+.inputGroup input:disabled {
     padding-left: 40px;
 }
 
+.icon i {
+    font-size: 20px;
+}
+
+/* ETAPA 1 */
 
 #colors {
     display: flex;
@@ -170,21 +238,179 @@ main form {
     background-color: #F1C40F;
 }
 
-form button#submit {
-    width: 90%;
-    padding: 10px;
-    border-radius: 12px;
-    font-size: 20px;
-    color: white;
-    background-color: #1c1c28;
-    border: 2px rgba(255,255,255,0.08) solid;
-    cursor: pointer;
+/* ETAPA 2 */
 
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+#step2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
 }
 
-form button#submit:hover {
+#step2 .inputGroup {
+    margin-bottom: 0px;
+    transition: 0.3s;
+}
+
+#step2 .inputGroup label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    padding: 12.8px;
+    margin-left: 8;
+    pointer-events: none;
+    transition: all 0.2s;
+    color: rgb(100, 100, 100);
+}
+
+#step2 .inputGroup label {
+    transform: translateY(-75%) scale(.9);
+    margin: 0;
+    margin-left: 20.8px;
+    padding: 6.4px;
+    background-color: #0a0a0f;
+}
+
+#step2 #addSocial {
     width: 100%;
-    border-radius: 50px;
-    background-color: #2a2a3a; 
+    margin-top: 20px;
+    display: none;
+}
+
+/* ETAPA 3 */
+
+#step3 {
+    display: flex;
+    flex-direction: column;
+}
+
+#step3 #openModal {
+    width: 100%;
+    margin: 20px 0px;
+}
+
+#step3 .inputGroup {
+    margin-bottom: 0px;
+    transition: 0.3s;
+}
+
+#step3 .removeIcon .iconContent {
+    width: 30px;
+    cursor: pointer;
+    right: 12px;
+}
+
+#step3 .icon .iconContent {
+    display: block;
+    width: 20px;
+    left: 12px;
+    pointer-events: none;
+}
+
+#step3 .iconContent {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+}
+
+#step3 .inputGroup label {
+    font-size: 100%;
+    position: absolute;
+    left: 0;
+    padding: 12.8px;
+    margin-left: 8;
+    pointer-events: none;
+    transition: all 0.2s;
+    color: rgb(100, 100, 100);
+}
+
+#step3 .inputGroup label {
+    transform: translateY(-75%) scale(.9);
+    margin: 0;
+    margin-left: 20.8px;
+    padding: 6.4px;
+    background-color: #0a0a0f;
+}
+
+#step3 .removeIcon {
+    position: relative;
+}
+
+#step3 .removeIcon .iconContent {
+    width: 30px;
+    cursor: pointer;
+    right: 12px;
+    display: block;
+    height: 20px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    color: white;
+}
+
+#nenhumLink {
+    text-align: center;
+    color: white;
+    font-weight: 600;
+}
+
+#nenhumLinkSub {
+    text-align: center;
+    color: white;
+    font-weight: 400;
+}
+
+/* MODAL */
+
+dialog:open {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    width: 90%;
+    min-height: 50%;
+    height: fit-content;
+    padding: 20px;
+    background-color: #0a0a0f;
+    border: 2px rgba(255, 255, 255, 0.555) solid;
+    border-radius: 12px;
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+}
+
+dialog h1 {
+    color: white;
+}
+
+dialog .inputGroup {
+    margin-bottom: 0px;
+}
+
+dialog button {
+    margin-top: 20px;
+}
+
+.customLinkGroup span {
+    font-size: 20px;
+}
+
+emoji-picker {
+    margin-top: 16px;
+
+    width: 100%;
+    --background: transparent;
+    --border-color: #1d1d21;
+    --border-size: 2px;
+    --border-radius: 12px;
+
+    --input-border-color: #1d1d21; 
+    --input-border-radius: 8px;
+    --input-border-size: 2px;
+    --outline-color: #1d1d21;
 }
