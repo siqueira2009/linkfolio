@@ -21,7 +21,9 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get('/u/:user', user);
 app.get('/create', createProfile);
 
+const PORT = 3001;
+
 // Faz o servidor ouvir (ficar de pé)
-app.listen(3000, '0.0.0.0', () => {
-    console.log("✅ Servidor iniciado em localhost:3000!");
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`✅ Servidor FRONT-END iniciado em localhost:${PORT}`);
 })
