@@ -1,0 +1,24 @@
+{
+  "name": "linkfolio",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/siqueira2009/linkfolio#readme",
+  "bugs": {
+    "url": "https://github.com/siqueira2009/linkfolio/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siqueira2009/linkfolio.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "dev": "cls && node --watch app.js"
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {}
+}
