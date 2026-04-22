@@ -11,8 +11,30 @@ function getUserByAt(req, res, at) {
     res.json(nedeedUser);
 }
 
-function postUser(req, res, name, pronouns, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links) {
-    const id = services.postUser(name, pronouns, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links);
+function updateViews(req, res, at) {
+    const updateViews = services.updateViews(at)
+
+    if (!updateViews) {
+        res.status(500).json({"erro": "Erro ao atualizar visualizações"});
+        return;
+    }
+
+    res.json({"mensagem": "Visualizações atualizadas"});
+}
+
+function updateClicks(req, res, at) {
+    const updateClicks = services.updateClicks(at)
+
+    if (!updateViews) {
+        res.status(500).json({"erro": "Erro ao atualizar cliques"});
+        return;
+    }
+
+    res.json({"mensagem": "Cliques atualizados"});
+}
+
+function postUser(req, res, name, pronouns, at, bio, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links) {
+    const id = services.postUser(name, pronouns, at, bio, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links);
 
     if (id == null || id == undefined) {
         res.status(500).json({"erro": "Não foi possível criar usuário"});
@@ -39,5 +61,7 @@ function deleteUser(req, res, at) {
 export {
     getUserByAt,
     postUser,
-    deleteUser
+    deleteUser,
+    updateViews,
+    updateClicks
 }

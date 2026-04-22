@@ -1,1 +1,53 @@
-[]
+[
+  {
+    "id": 0,
+    "name": "Lucas Siqueira",
+    "pronouns": "ele/dele",
+    "at": "siqueira2009",
+    "bio": "Estudante de Desenvolvimento de Sistemas | Full Stack em formação | HTML • CSS • JavaScript • Node.js  • Express.js",
+    "views": 8,
+    "clicks": 29,
+    "Instagram": "",
+    "LinkedIn": "lucasdesouzasiqueira",
+    "X/Twitter": "",
+    "GitHub": "siqueira2009",
+    "YouTube": "siqueeeira",
+    "Discord": "siqueeeira",
+    "Steam": "siqueeeira",
+    "Facebook": "",
+    "TikTok": "",
+    "links": [
+      {
+        "name": "TaskFlow",
+        "url": "siqueira2009.github.io/taskflow",
+        "emoji": "🎯",
+        "bio": "Uma lista de tarefas focada em produtividade"
+      },
+      {
+        "name": "Pedra, papel e tesoura",
+        "url": "siqueira2009.github.io/ppt",
+        "emoji": "👾",
+        "bio": "Um jogo de pedra, papel e tesoura contra uma máquina"
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "ana paula",
+    "pronouns": "elu delu",
+    "at": "anepaule",
+    "bio": "sou nb",
+    "views": 9,
+    "clicks": 0,
+    "Instagram": "",
+    "LinkedIn": "",
+    "X/Twitter": "",
+    "GitHub": "",
+    "YouTube": "",
+    "Discord": "",
+    "Steam": "",
+    "Facebook": "",
+    "TikTok": "",
+    "links": []
+  }
+]

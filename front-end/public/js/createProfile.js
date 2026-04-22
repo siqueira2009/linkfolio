@@ -43,6 +43,15 @@ function reset() { // Função que reseta a página (inputs etc.)
 // 1️⃣ FUNÇÕES DE LÓGICA
 // =================================================
 
+class Link {
+    constructor(name, url, emoji, bio) {
+        this.name = name,
+        this.url = url,
+        this.emoji = emoji,
+        this.bio = bio
+    }
+}
+
 const stepsTitles = { // Objeto que guarda os títulos de cada etapa
     "step0": "Escolha sua personalização",
     "step1": "Onde podemos te encontrar?",
@@ -60,6 +69,10 @@ let socials = { // Objeto que guarda o @ de cada rede social (null para vazio)
     'facebook': null,
     'tiktok': null
 }
+
+let customLinksArray = [
+
+]
 
 let currentStep = 0; // Variável que guarda a etapa atual
 let selectedEmoji = false; // Variável que guarda se o emoji foi selecioado
@@ -230,11 +243,16 @@ function showEmptyLinksMessage() { // Função que verifica se é necessário mo
 function addLink() { // Função para adicionar links
     const addButton = document.getElementById("addLink");
     const dialog = document.querySelector('dialog');
-    const customLinks = document.getElementById('customLinks')
+    const customLinks = document.getElementById('customLinks');
+    const customLinksInput = document.getElementById('customLinksInput')
 
     let name = dialog.querySelector('#linkName')
     let url = dialog.querySelector('#linkUrl')
     let emoji = dialog.querySelector('#linkEmoji')
+    let bio = dialog.querySelector('#linkBio')
+
+    const newLinks = new Link(name.value, url.value, emoji.value, bio.value);
+    customLinksArray.push(newLinks)
 
     if (name.value != "" && url.value != "" && emoji.value != "") {
         let templateLink = document.getElementById('customLinkTemplate');
@@ -242,9 +260,7 @@ function addLink() { // Função para adicionar links
         customLink.style.display = ''
 
         let linkName = customLink.querySelector('label')
-        linkName.name = 'link' + totalCustomLinks;
         let linkUrl = customLink.querySelector('input')
-        linkUrl.name = 'link' + totalCustomLinks;
         let linkEmoji = customLink.querySelector('span')
 
         linkName.textContent = name.value;
@@ -255,18 +271,22 @@ function addLink() { // Função para adicionar links
 
         name.value = ""
         url.value = ""
+        bio.value = ""
         emoji.value = ""
         name.style.borderColor = '';
         url.style.borderColor = '';
         emoji.style.borderColor = '';
+        bio.style.borderColor = '';
         selectedEmoji = false;
 
         addButton.setAttribute('disabled', 'true')
-        removeLinkEvent(customLink);
+        removeLinksEvent(customLink);
         closeModal();
         totalCustomLinks++;
 
         showEmptyLinksMessage();
+
+        customLinksInput.value = JSON.stringify(customLinksArray);
     }
 }
 
@@ -365,6 +385,7 @@ function allEvents() { // Chama todas elas aqui dentro (menos a de remover link,
     closeEvent();
     openEvent();
     addLinksEvent();
+    emojiPickerEvent();
 }
 
 // =================================================

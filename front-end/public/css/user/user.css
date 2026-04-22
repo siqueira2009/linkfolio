@@ -90,10 +90,15 @@ main * {
     font-weight: 600;
 }
 
+#profile .userPronouns {
+    font-size: 16px;
+    font-style: italic;
+    margin-bottom: 5px;
+}
+
 #profile .userAt {
     font-size: 22px;
     font-weight: 400;
-    margin-bottom: 10px;
 }
 
 /* ESTATÍSTICAS DE PERFIL */
@@ -188,6 +193,8 @@ main * {
 
 #userLinks .link {
     display: grid;
+    justify-content: center;
+    align-items: center;
     grid-template-columns: 1fr 8fr 1fr;
 
     width: 100%;
@@ -200,6 +207,11 @@ main * {
 }
 
 #userLinks .linkIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    aspect-ratio: 1/1;
+
     font-size: 25px;
     padding: 5px;
     border-radius: 12px;

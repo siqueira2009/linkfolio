@@ -24,18 +24,18 @@
             <!-- ETAPA 1: Informações básicas (nome, usuário e @) -->
             <section style="display: block;" class="steps" id="step1">
                 <div class="inputGroup">
-                    <input class="required" name="user" type="text" required="" value="">
-                    <label for="user">Usuário da página<span class="required">*</span></label>
-                    <div class="icon">
-                        <i class="iconContent" data-lucide="link"></i>
-                    </div>
-                </div>
-    
-                <div class="inputGroup">
                     <input class="required" name="name" type="text" required="" value="">
                     <label for="name">Seu nome<span class="required">*</span></label>
                     <div class="icon">
                         <i class="iconContent" data-lucide="user"></i>
+                    </div>
+                </div>
+
+                <div class="inputGroup">
+                    <input class="required" name="pronouns" type="text" required="" value="">
+                    <label for="pronouns">Seus pronomes<span class="required">*</span></label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="hat-glasses"></i>
                     </div>
                 </div>
     
@@ -46,9 +46,17 @@
                         <i class="iconContent" data-lucide="at-sign"></i>
                     </div>
                 </div>
+
+                <div class="inputGroup" style="margin: 0; margin-top: 16px;">
+                    <input class="required" name="bio" type="text" id="meuInput" required="" value=""></input>
+                    <label for="bio">Escreva um pouco sobre você<span class="required">*</span></label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="pen"></i>
+                    </div>
+                </div>
     
                 <div class="inputGroup requireDeletion">
-                    <input name="color" style="display: none;" type="text" id="colorInput" value="red">
+                    <input style="display: none;" type="text" id="colorInput" value="red">
                 </div>
     
                 <section id="colors">
@@ -78,8 +86,8 @@
                     </div>
                 </div>
                 <div class="inputGroup inputSocial requireDeletion" id="social2">
-                    <input name="x/twitter" type="text" value="" placeholder="Digite seu usuário aqui...">
-                    <label for="x/twitter">X/Twitter</label>
+                    <input name="x" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <label for="x">X/Twitter</label>
                     <div class="icon">
                         <i class="iconContent fa-brands fa-x-twitter"></i>
                     </div>
@@ -145,12 +153,14 @@
                 <button class="stepsButton" type="button" id="back" disabled="true">Voltar</button>
                 <button class="stepsButton" type="button" id="foward" disabled="true">Avançar</button>
             </div>
+
+            <input style="display: none" type="text" name="customLinks" id="customLinksInput">
         </form>
         
         <!-- TEMPLATE DE LINK PERSONALIZADO -->
         <div class="inputGroup customLinkGroup" style="display: none;" id="customLinkTemplate">
-            <input name="" type="text" required="" value="" disabled>
-            <label for=""></label>
+            <input type="text" required="" value="" disabled>
+            <label></label>
             <div class="icon">
                 <span class="iconContent"></span>
             </div>
@@ -164,24 +174,33 @@
             <h1>Adicionar link</h1>
             
             <div class="inputGroup">
-                <input class="required" name="user" type="text" required="" value="" id="linkName">
-                <label for="name">Nome do link</label>
+                <input class="required" type="text" required="" value="" id="linkName">
+                <label>Nome do link</label>
                 <div class="icon">
                     <i class="iconContent" data-lucide="id-card-lanyard"></i>
                 </div>
             </div>
             
             <div class="inputGroup">
-                <input class="required" name="user" type="text" required="" value="" id="linkUrl">
-                <label for="name">URL do link</label>
+                <input class="required" type="text" required="" value="" id="linkUrl">
+                <label>URL do link</label>
                 <div class="icon">
                     <i class="iconContent" data-lucide="link"></i>
+                </div>
+
+            </div>
+
+            <div class="inputGroup">
+                <input class="required" type="text" required="" value="" id="linkBio">
+                <label>Breve descrição</label>
+                <div class="icon">
+                    <i class="iconContent" data-lucide="pencil"></i>
                 </div>
             </div>
             
             <div class="inputGroup">
-                <input name="user" type="text" required="" id="linkEmoji" disabled placeholder="Escolha um emoji abaixo...">
-                <label for="name">Emoji escolhido</label>
+                <input type="text" required="" id="linkEmoji" disabled placeholder="Escolha um emoji abaixo...">
+                <label>Emoji escolhido</label>
                 <div class="icon">
                     <i class="iconContent" data-lucide="chess-knight"></i>
                 </div>
@@ -199,7 +218,7 @@
     </main>
 
     <!-- Importação de scripts -->
-    <script src="../js/create_profile.js"></script>
+    <script src="../js/createProfile.js"></script>
 
     <!-- Importação de bibliotecas -->
     <script src="https://unpkg.com/lucide@latest"></script> <!-- Ícones Lucide -->

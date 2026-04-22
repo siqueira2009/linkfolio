@@ -11,7 +11,7 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "dev": "cls && concurrently \"cd back-end && node app.js\" \"cd front-end && node app.js\""
+    "dev": "cls && concurrently \"cd back-end && node --watch app.js\" \"cd front-end && node --watch app.js\""
   },
   "dependencies": {
     "express": "^5.2.1"

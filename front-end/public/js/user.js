@@ -24,67 +24,46 @@ function animation() { // Função que anima o carregamento da página
 
 function reset() { // Função que reseta a página (inputs etc.)
     lucide.createIcons();
-
-    const inputs = document.querySelectorAll('input');
-    const fowardBtn = document.getElementById('foward');
-    const backBtn = document.getElementById('back');
-    const addButton = document.getElementById('addLink');
-    
-    inputs.forEach(input => {
-        input.value = "";
-    });
-
-    fowardBtn.setAttribute('disabled', 'true')
-    backBtn.setAttribute('disabled', 'true')
-    addButton.setAttribute('disabled', 'true');
 }
 
 // =================================================
 // 1️⃣ FUNÇÕES DE LÓGICA
 // =================================================
 
+const socialColors = {
+  "LinkedIn": "#0A66C2",
+  "Instagram": "#DD2A7B",
+  "X/Twitter": "#1DA1F2",
+  "GitHub": "#0FBF3E",
+  "YouTube": "red",
+  "Discord": "#5865F2",
+  "Steam": "#1387b8",
+  "Facebook": "#0866ff",
+  "TikTok": "#EE1D52"
+};
+
 function socialColorsEnter(btn) { // Função que coloca cor no ícone e texto da rede social
     const icon = btn.querySelector('i');
+    const p = btn.querySelector('p');
     const secondColor = icon.getAttribute('secondColor');
     const color = icon.getAttribute('color');
-    const gradientKey = icon.getAttribute('data-gradient');
 
-    icon.setAttribute('color', secondColor);
-    icon.setAttribute('secondColor', color);
+    icon.style.color = socialColors[p.textContent];
 
-    if (gradientKey && gradients[gradientKey]) {
-        icon.style.opacity = 0;
-        icon.style.width = '0%';
-        icon.nextElementSibling.style.opacity = 1;
-        icon.nextElementSibling.style.width = '31.25px';
-        icon.nextElementSibling.style.height = '25px';
-        
-    } else {
-        icon.style.color = secondColor;
-    }
-
-    btn.querySelector('p').style.color = secondColor;
-    btn.querySelector('p').style.textDecoration = 'underline';
+    p.style.color = socialColors[p.textContent];
+    p.style.textDecoration = 'underline';
 }
 
 function socialColorsOut(btn) { // Função que remove cor no ícone e texto da rede social
     const icon = btn.querySelector('i');
+    const p = btn.querySelector('p');
     const secondColor = icon.getAttribute('secondColor');
     const color = icon.getAttribute('color');
-    const gradientKey = icon.getAttribute('data-gradient');
-    icon.setAttribute('color', secondColor);
-    icon.setAttribute('secondColor', color);
-    if (gradientKey && gradients[gradientKey]) {
-        icon.style.opacity = 1;
-        icon.style.width = '';
-        icon.nextElementSibling.style.opacity = 0;
-        icon.nextElementSibling.style.width = '0%';
-        icon.nextElementSibling.style.height = '0';  // ← linha adicionada
-    } else {
-        icon.style.color = secondColor;
-    }
-    btn.querySelector('p').style.color = secondColor;
-    btn.querySelector('p').style.textDecoration = '';
+
+    icon.style.color = 'white';
+
+    p.style.color = 'white';
+    p.style.textDecoration = '';
 }
 
 function socialEvents() { // Função que adiciona os event listeners quando colocar ou tirar o mouse de cima da rede social
@@ -101,6 +80,51 @@ function socialEvents() { // Função que adiciona os event listeners quando col
     })
 }
 
+async function clickUpdater() {
+    const at = document.querySelector('.userAt').textContent;
+
+    await fetch(`http://localhost:3000/user/${at}/clicks`, {
+        method: "PUT",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+
+    updateInfo();
+}
+
+async function updateInfo() {
+    const ctr = document.getElementById('ctr');
+    const clicks = document.getElementById('clicks');
+
+    const at = document.querySelector('.userAt').textContent;
+
+    const response = await fetch(`http://localhost:3000/user/${at}`, {
+        method: "GET",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    });
+
+    const data = await response.json();
+
+    clicks.textContent = data.clicks;
+    ctr.textContent = ((data.clicks / data.views) * 100).toFixed(1) +  '%'
+}
+
+function clickEvents() {
+    const a = document.querySelectorAll('a');
+
+    a.forEach(a => {
+        a.addEventListener('click', clickUpdater);
+        a.addEventListener('mousedown', (event) => {
+            if (event.button == 1) {
+                clickUpdater();
+            }
+        })
+    });
+}
+
 // =================================================
 // 3️⃣ FUNÇÃO QUE RODA QUANDO A PÁGINA É CARREGADA
 // =================================================
@@ -110,4 +134,5 @@ document.addEventListener('DOMContentLoaded', () => {
     animation(); // Chama a função de animação
 
     socialEvents(); // Configura o event listener de rede social
+    clickEvents();
 })
