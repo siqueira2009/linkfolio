@@ -3,16 +3,22 @@ import * as controllers from '../controllers/userControllers.js'
 
 const router = express.Router();
 
-router.get('/:user', (req, res) => {
-    const user = req.params.user;
+router.get('/:at', (req, res) => {
+    const at = req.params.at;
 
-    controllers.getUserByUser(req, res, user);
+    controllers.getUserByAt(req, res, at);
 })
 
 router.post('/', (req, res) => {
-    const {name, user, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok} = req.body;
+    const {name, pronouns, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links} = req.body;
 
-    controllers.postUser(req, res, name, user, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok);
+    controllers.postUser(req, res, name, pronouns, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links);
+});
+
+router.delete('/:at', (req, res) => {
+    const at = req.params.at;
+
+    controllers.deleteUser(req, res, at);
 })
 
 export default router

@@ -1,8 +1,8 @@
 class UserModel {
-    constructor(id, name, user, at) {
+    constructor(id, name, pronouns, at) {
         this.id = id,
         this.name = name,
-        this.user = user,
+        this.pronouns = pronouns,
         this.at = at
     }
 }

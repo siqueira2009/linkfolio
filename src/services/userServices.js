@@ -2,50 +2,71 @@ import fs from 'fs';
 import { UserModel, SocialsModel } from '../models/userModels.js'
 
 const jsonTaskPath = 'src/data/users.json';
-var idCounter = 0;
 
-var users;
+var users = [];
 
 try {
-    users = JSON.parse(fs.readFileSync(jsonTaskPath, 'utf-8'));
+    const data = fs.readFileSync(jsonTaskPath, 'utf-8');
+    users = JSON.parse(data);
+    if (!Array.isArray(users)) users = [];
 } catch (err) {
-    fs.writeFileSync(jsonTaskPath, "[]", 'utf-8', (err) => {
-        if (err) {
-            console.log("Erro ao criar arquivo JSON: " + err);
-        } else {
-            console.log("Arquivo JSON de tarefas criado com sucesso!");
-        }
-    });
-
-    users = JSON.parse(fs.readFileSync(jsonTaskPath, 'utf-8'));
+    console.log("Erro ao ler arquivo JSON, criando novo: " + err);
+    fs.writeFileSync(jsonTaskPath, "[]", 'utf-8');
+    users = [];
 }
 
+let idCounter = users.length;
+
 function updateJSON() {
-    fs.writeFile(jsonTaskPath, JSON.stringify(users, null, 2), (err) => {
-        if (err) console.log('Erro ao editar arquivo JSON: ' + err);
-    });
+    try {
+        fs.writeFileSync(jsonTaskPath, JSON.stringify(users, null, 2), 'utf-8');
+    } catch (err) {
+        console.log('Erro ao editar arquivo JSON: ' + err);
+    }
 };
 
-function getUserByUser(user) {
-    console.log(user)
+function getAt(user) {
+    return user.at;
+}
 
-    const nedeedUser = users.find(u => u.user == user);
+function getUserByAt(at) {
+    const nedeedUser = users.find(u => u.at == at);
 
     return nedeedUser;
 }
 
-function postUser(name, user, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok) {
-    const userDetails = new UserModel(idCounter++, name, user, at);
+function postUser(name, pronouns, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links) {
+    const allAts = users.map(getAt);
+
+    if (allAts.includes(at)) {
+        return "duplicated"
+    }
+
+    const userDetails = new UserModel(idCounter, name, pronouns, at);
     const userSocials = new SocialsModel(instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok);
+    const userLinks = Array.isArray(JSON.parse(links)) ? JSON.parse(links) : [];
     const newUser = {...userDetails, ...userSocials};
+    console.log('Links recebidos:', userLinks);
+
+    newUser.links = userLinks;
 
     users.push(newUser);
     updateJSON();
-    return newUser.id;
     idCounter++;
+    return newUser.id;
+}
+
+function deleteUser(at) {
+    const index = users.findIndex(u => u.at == at);
+
+    users.splice(index, 1);
+    updateJSON();
+
+    return index;
 }
 
 export {
-    getUserByUser,
-    postUser
+    getUserByAt,
+    postUser,
+    deleteUser
 }
