@@ -137,21 +137,21 @@ function stepControl(e) { // Função que administra o controle de etapas
 }
 
 function verifyFields() { // Função que verifica os campos (se estão vazios/válidos)
-    let allowPass = true;
     const fowardButton = document.getElementById('foward');
     const addButton = document.getElementById('addLink');
 
     if (currentStep == 0) {
         const step1Inputs = document.querySelectorAll('#step1 .inputGroup input.required')
+        let allowPass = true;
     
-        step1Inputs.forEach(stepInput => {
-            if (stepInput.value == "") {
+        for (let i = 0; i < step1Inputs.length; i++) {
+            if (step1Inputs[i].value == "" || step1Inputs[i].classList.contains('atExistente')) {
                 allowPass = false;
-                return;
+                break;
             } else {
                 allowPass = true;
-            }
-        });
+            }    
+        }
 
         if (allowPass == true) {
             fowardButton.removeAttribute('disabled');
@@ -191,6 +191,10 @@ function selectColor(currentColor) { // Função que administra a seleção de c
     currentColor.classList.add('selected');
 
     colorInput.value = currentColor.id;
+
+    colorInput.dispatchEvent(new Event("change"))
+
+    console.log(colorInput.value)
 }
 
 function social(inputContainer, currentFiel) { // Função que administra as redes sociais (coloca/remove do objeto)
@@ -212,6 +216,10 @@ function closeModal() { // Função que fecha o modal de adicionar link personal
     const name = dialog.querySelector('#linkName');
     const url = dialog.querySelector('#linkUrl');
     const emoji = dialog.querySelector('#linkEmoji');
+
+    const form = document.querySelector('form');
+
+    form.style.filter = 'blur(0px)';
     
     name.value = "";
     url.value = "";
@@ -220,12 +228,22 @@ function closeModal() { // Função que fecha o modal de adicionar link personal
     url.style.borderColor = '';
     emoji.style.borderColor = '';
     
+    dialog.style.marginTop = '1000px';
+
+    setTimeout(() => {
+        dialog.setAttribute('open', 'false');
+        dialog.style.marginTop = '';
+    }, 400)
+
     selectedEmoji = false;
     addButton.setAttribute('disabled', 'true')
-    dialog.removeAttribute('open');
 }
 
 function openModal() { // Função que abre o modal de adicionar link personalizado
+    const form = document.querySelector('form');
+
+    form.style.filter = 'blur(2px)';
+
     const dialog = document.querySelector('dialog');
     dialog.setAttribute('open', 'true');
 }
@@ -296,6 +314,33 @@ function removeLink() { // Função para remover links
     totalCustomLinks--;
 
     showEmptyLinksMessage();
+}
+
+async function verifyAt() {
+    const atInput = document.getElementById('atInput');
+    const at = atInput.value;
+
+    const user = await fetch(`http://localhost:3000/user/${at}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+
+    if (user.ok == true) {
+        console.log("Já existe!")
+        atInput.classList.add('atExistente')
+        atInput.style.borderColor = "#FF4D4D";
+        alert("Esse @ já existe! Tente outro.")
+        verifyFields();
+        return;
+    } else {
+        console.log("Não existe!")
+        atInput.classList.remove('atExistente')
+        atInput.style.borderColor = "";
+        verifyFields();
+        return;
+    }
 }
 
 // =================================================
@@ -376,6 +421,12 @@ function emojiPickerEvent() { // Adiciona os event listeners no seletor de emoji
     });
 }
 
+function atEvent() {
+    const atInput = document.getElementById('atInput');
+
+    atInput.addEventListener('keyup', verifyAt);
+}
+
 // Função que junta todos as funções de event listeners
 function allEvents() { // Chama todas elas aqui dentro (menos a de remover link, que é chamada sempre que um novo link é criado)
     stepsEvents();
@@ -386,6 +437,7 @@ function allEvents() { // Chama todas elas aqui dentro (menos a de remover link,
     openEvent();
     addLinksEvent();
     emojiPickerEvent();
+    atEvent();
 }
 
 // =================================================
@@ -397,4 +449,9 @@ document.addEventListener('DOMContentLoaded', () => {
     animation(); // Chama a função de animação
     
     allEvents(); // Configura todos os event listeners
+
+    const defaultColor = document.querySelector('.color.selected');
+    if (defaultColor) {
+        document.getElementById('colorInput').value = defaultColor.id;
+    }
 })

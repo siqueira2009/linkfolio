@@ -64,14 +64,14 @@ function updateClicks(at) {
     return nedeedUser;
 }
 
-function postUser(name, pronouns, at, bio, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links) {
+function postUser(name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links) {
     const allAts = users.map(getAt);
 
     if (allAts.includes(at)) {
         return "duplicated"
     }
 
-    const userDetails = new UserModel(idCounter, name, pronouns, at, bio);
+    const userDetails = new UserModel(idCounter, name, pronouns, at, bio, color);
     const userSocials = new SocialsModel(instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok);
     const userLinks = Array.isArray(links) ? links : [];
     const newUser = {...userDetails, ...userSocials};

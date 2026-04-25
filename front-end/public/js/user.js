@@ -81,35 +81,46 @@ function socialEvents() { // Função que adiciona os event listeners quando col
 }
 
 async function clickUpdater() {
-    const at = document.querySelector('.userAt').textContent;
+    const at = document.querySelector('.userAt').textContent.replace('@', '');
 
-    await fetch(`http://localhost:3000/user/${at}/clicks`, {
-        method: "PUT",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
+    console.log(at)
 
-    updateInfo();
+    try {
+        const response = await fetch(`http://localhost:3000/user/${at}/clicks`, {
+            method: "PUT"
+        });
+
+        if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+        }
+
+        updateInfo();
+    } catch (error) {
+        console.error('Falha ao atualizar clicks:', error);
+    }
 }
 
 async function updateInfo() {
     const ctr = document.getElementById('ctr');
     const clicks = document.getElementById('clicks');
 
-    const at = document.querySelector('.userAt').textContent;
+    const at = document.querySelector('.userAt').textContent.replace('@', '');
+    try {
+        const response = await fetch(`http://localhost:3000/user/${at}`, {
+            method: "GET",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+        });
+    
+        const data = await response.json();
+    
+        clicks.textContent = data.clicks;
+        ctr.textContent = ((data.clicks / data.views) * 100).toFixed(1) +  '%'
+    } catch (error) {
+        console.error('Falha ao atualizar clicks, visualizações e CTR:', error);
+    }
 
-    const response = await fetch(`http://localhost:3000/user/${at}`, {
-        method: "GET",
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    });
-
-    const data = await response.json();
-
-    clicks.textContent = data.clicks;
-    ctr.textContent = ((data.clicks / data.views) * 100).toFixed(1) +  '%'
 }
 
 function clickEvents() {

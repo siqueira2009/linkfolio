@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>LinkFolio | @<%=user.at%></title>
     <link rel="stylesheet" href="../css/user/user.css">
     <link rel="stylesheet" href="../css/user/user_responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <!-- MENSAGEM PARA QUANDO A TELA É MUITO PEQUENA -->
@@ -15,12 +16,12 @@
         <h3>🤏 Sua tela é muito pequena<h3>
     </div>
 
-    <main>
+    <main id="color-<%=user.color%>">
         <!-- Seção do perfil (foto, nome, arroba e sobre) -->
         <section id="profile">
-            <h1 class="userIcon"><%= user.firstLetters %></h1>
+            <h1 class="userIcon bgModified"><%= user.firstLetters %></h1>
             <h1 class="userName"><%= user.name %></h1>
-            <p class="userAt"><%= user.at %></p>
+            <p class="userAt colorModified">@<%= user.at %></p>
             <span class="userPronouns">(<%= user.pronouns %>)</span>
             <h3 class="userBio"><%= user.bio %></h3>
         </section>
@@ -28,20 +29,20 @@
         <!-- Seção das estatísticas (cliques, links e CTR) -->
         <section id="userStats">
             <article class="card">
-                <h1 id="views"><%= user.views %></h1>
+                <h1 id="views" class="colorModified"><%= user.views %></h1>
                 <p>visualizações</p>
             </article>
 
             <article class="card">
-                <h1 id="clicks"><%= user.clicks %></h1>
+                <h1 id="clicks"  class="colorModified"><%= user.clicks %></h1>
                 <p>cliques</p>
             </article>
 
             <article class="card">
                 <% if (user.views == 0 && user.clicks == 0) { %>
-                    <h1>0%</h1>
+                    <h1 class="colorModified">0%</h1>
                 <% } else { %>
-                    <h1 id="ctr"><%=((user.clicks / user.views) * 100).toFixed(1)%>%</h1>
+                    <h1 id="ctr" class="colorModified"><%=((user.clicks / user.views) * 100).toFixed(1)%>%</h1>
                 <% } %>
                 <p>CTR</p>
             </article>
@@ -49,7 +50,7 @@
 
         <!-- Seção das redes sociais -->
         <section id="userSocials">
-            <p class="topic">Redes sociais</p>
+            <p class="topic"><span class="colorModified">Redes</span> sociais</p>
             <div id="socialsContainer">
                 <% const socials = ["Instagram", "LinkedIn", "X/Twitter", "GitHub", "YouTube", "Discord", "Steam", "Facebook", "TikTok"]%>
                 <% const socialLogos = ["fa-instagram", "fa-square-linkedin", "fa-x-twitter", "fa-github", "fa-youtube", "fa-discord", "fa-steam", "fa-facebook", "fa-tiktok"] %>
@@ -68,11 +69,11 @@
         
         <!-- Seção de links personalizados do usuário -->
         <section id="userLinks">
-            <p class="topic">Links em destaque</p>
+            <p class="topic"><span class="colorModified">Links</span> em destaque</p>
             <div id="linksContainer">
                 <% for (let i = 0; i < user.links.length; i++) {%>
                 <a class="link" href="http://<%= user.links[i].url %>" target="_blank" rel="noopener noreferrer">
-                    <div class="linkIcon"><%= user.links[i].emoji %></div>
+                    <div class="linkIcon bgModified"><%= user.links[i].emoji %></div>
                     <div class="linkText">
                         <h2 class="title"><%= user.links[i].name %></h2>
                         <p class="subtitle"><%= user.links[i].bio %></p>

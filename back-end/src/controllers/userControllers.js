@@ -25,7 +25,7 @@ function updateViews(req, res, at) {
 function updateClicks(req, res, at) {
     const updateClicks = services.updateClicks(at)
 
-    if (!updateViews) {
+    if (!updateClicks) {
         res.status(500).json({"erro": "Erro ao atualizar cliques"});
         return;
     }
@@ -33,8 +33,8 @@ function updateClicks(req, res, at) {
     res.json({"mensagem": "Cliques atualizados"});
 }
 
-function postUser(req, res, name, pronouns, at, bio, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links) {
-    const id = services.postUser(name, pronouns, at, bio, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links);
+function postUser(req, res, name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links) {
+    const id = services.postUser(name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links);
 
     if (id == null || id == undefined) {
         res.status(500).json({"erro": "Não foi possível criar usuário"});

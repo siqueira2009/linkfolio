@@ -1,10 +1,11 @@
 class UserModel {
-    constructor(id, name, pronouns, at, bio) {
+    constructor(id, name, pronouns, at, bio, color) {
         this.id = id,
         this.name = name,
         this.pronouns = pronouns,
         this.at = at,
         this.bio = bio
+        this.color = color,
         this.views = 0;
         this.clicks = 0;
     }

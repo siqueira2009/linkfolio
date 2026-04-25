@@ -18,16 +18,98 @@ body {
     min-width: 100dvw;
     min-height: 100dvh;
 
-    background-color: #0a0a0f;
+    background: radial-gradient(ellipse at top, #0f0f1a 0%, #0a0a0f 60%);
 
     padding: 30px;
 }
+
+body::before {
+    content: '';
+    position: fixed;
+    top: -150px;
+    left: -100px;
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(255, 107, 255, 0.05) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+body::after {
+    content: '';
+    position: fixed;
+    bottom: -150px;
+    right: -100px;
+    width: 700px;
+    height:  700px;
+    background: radial-gradient(circle, rgba(255, 107, 255, 0.05) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* Cores de fundo */
+
+body:has(main#color-red)::before,
+body:has(main#color-red)::after { background: radial-gradient(circle, rgba(255, 77,  77,  0.05) 0%, transparent 65%); }
+main#color-red::before { background: radial-gradient(circle, rgba(255, 77,  77,  0.1) 0%, transparent 65%); }
+
+body:has(main#color-green)::before,
+body:has(main#color-green)::after { background: radial-gradient(circle, rgba(46,  204, 113, 0.05) 0%, transparent 65%); }
+main#color-green::before { background: radial-gradient(circle, rgba(46,  204, 113, 0.1) 0%, transparent 65%); }
+
+body:has(main#color-blue)::before,
+body:has(main#color-blue)::after { background: radial-gradient(circle, rgba(52,  152, 219, 0.05) 0%, transparent 65%); }
+main#color-blue::before { background: radial-gradient(circle, rgba(52,  152, 219, 0.1) 0%, transparent 65%); }
+
+body:has(main#color-white)::before,
+body:has(main#color-white)::after { background: radial-gradient(circle, rgba(255, 255, 255, 0.04) 0%, transparent 65%); }
+main#color-white::before { background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 65%); }
+
+body:has(main#color-orange)::before,
+body:has(main#color-orange)::after { background: radial-gradient(circle, rgba(230, 126, 34,  0.05) 0%, transparent 65%); }
+main#color-orange::before { background: radial-gradient(circle, rgba(230, 126, 34,  0.1) 0%, transparent 65%); }
+
+body:has(main#color-yellow)::before,
+body:has(main#color-yellow)::after { background: radial-gradient(circle, rgba(241, 196, 15,  0.05) 0%, transparent 65%); }
+main#color-yellow::before { background: radial-gradient(circle, rgba(241, 196, 15,  0.1) 0%, transparent 65%); }
+
+/* Cores das letras */
+body:has(main#color-red) .colorModified { color: #FF4D4D; }
+
+body:has(main#color-green) .colorModified { color: #2ECC71; }
+
+body:has(main#color-blue) .colorModified { color: #3498DB; }
+
+body:has(main#color-white) .colorModified { color: #FFFFFF; }
+
+body:has(main#color-orange) .colorModified { color: #E67E22; }
+
+body:has(main#color-yellow) .colorModified { color: #F1C40F; }
+
+/* Cores dos fundos */
+body:has(main#color-red) .bgModified { background-color: rgba(255, 77,  77,  0.15); }
+
+body:has(main#color-green) .bgModified { background-color: rgba(46,  204, 113, 0.15); }
+
+body:has(main#color-blue) .bgModified { background-color: rgba(52,  152, 219, 0.15); }
+
+body:has(main#color-white) .bgModified { background-color: rgba(255, 255, 255, 0.10); }
+
+body:has(main#color-orange) .bgModified { background-color: rgba(230, 126, 34,  0.15); }
+
+body:has(main#color-yellow) .bgModified { background-color: rgba(241, 196, 15,  0.15); }
+
+
 
 .topic {
     align-self: start;
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 10px;
+}
+
+.topic span {
+    font-weight: 600;
 }
 
 /* MAIN */
@@ -43,6 +125,21 @@ main {
     height: 95%;
 
     background-color: transparent;
+    position: relative;
+    z-index: 1; /* fica acima dos glows do body */
+}
+
+main::before {
+    content: '';
+    position: fixed;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 700px;
+    height: 700px;
+    background: radial-gradient(circle, rgba(255, 0, 0, 0.05) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
 }
 
 main * {

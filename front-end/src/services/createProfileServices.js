@@ -1,4 +1,4 @@
-async function createProfile(name, pronouns, at, bio, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, customLinks) {
+async function createProfile(name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, customLinks) {
     const parsedLinks = customLinks ? JSON.parse(customLinks) : []; 
     
     const data = {
@@ -6,6 +6,7 @@ async function createProfile(name, pronouns, at, bio, instagram, linkedin, x, gi
         pronouns: pronouns,
         at: at,
         bio: bio,
+        color: color,
         instagram: instagram,
         linkedin: linkedin,
         x: x,
@@ -26,7 +27,7 @@ async function createProfile(name, pronouns, at, bio, instagram, linkedin, x, gi
         body: JSON.stringify(data)
     });
 
-    return response;
+    return response.ok;
 }
 
 export {

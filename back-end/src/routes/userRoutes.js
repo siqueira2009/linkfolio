@@ -22,9 +22,9 @@ router.put('/:at/views', (req, res) => {
 });
 
 router.post('/', (req, res) => {
-    const {name, pronouns, at, bio, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links} = req.body;
+    const {name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links} = req.body;
 
-    controllers.postUser(req, res, name, pronouns, at, bio, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links);
+    controllers.postUser(req, res, name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links);
 });
 
 router.delete('/:at', (req, res) => {

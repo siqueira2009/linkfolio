@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criar Perfil</title>
+    <title>LinkFolio | Criar Perfil</title>
     <link rel="stylesheet" href="css/create/create.css">
     <link rel="stylesheet" href="css/create/create_responsive.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <!-- MENSAGEM PARA QUANDO A TELA É MUITO PEQUENA -->
@@ -24,7 +25,7 @@
             <!-- ETAPA 1: Informações básicas (nome, usuário e @) -->
             <section style="display: block;" class="steps" id="step1">
                 <div class="inputGroup">
-                    <input class="required" name="name" type="text" required="" value="">
+                    <input class="required" name="name" type="text" required="" value="" autocomplete="off">
                     <label for="name">Seu nome<span class="required">*</span></label>
                     <div class="icon">
                         <i class="iconContent" data-lucide="user"></i>
@@ -32,7 +33,7 @@
                 </div>
 
                 <div class="inputGroup">
-                    <input class="required" name="pronouns" type="text" required="" value="">
+                    <input class="required" name="pronouns" type="text" required="" value="" autocomplete="off">
                     <label for="pronouns">Seus pronomes<span class="required">*</span></label>
                     <div class="icon">
                         <i class="iconContent" data-lucide="hat-glasses"></i>
@@ -40,7 +41,7 @@
                 </div>
     
                 <div class="inputGroup" style="margin: 0; margin-top: 16px;">
-                    <input class="required" name="at" type="text" id="meuInput" required="" value="">
+                    <input class="required" name="at" type="text" required="" value="" autocomplete="off" id="atInput">
                     <label for="at">Escolha um @<span class="required">*</span></label>
                     <div class="icon">
                         <i class="iconContent" data-lucide="at-sign"></i>
@@ -48,16 +49,15 @@
                 </div>
 
                 <div class="inputGroup" style="margin: 0; margin-top: 16px;">
-                    <input class="required" name="bio" type="text" id="meuInput" required="" value=""></input>
+                    <input class="required" name="bio" type="text" required="" value="" autocomplete="off">
                     <label for="bio">Escreva um pouco sobre você<span class="required">*</span></label>
                     <div class="icon">
                         <i class="iconContent" data-lucide="pen"></i>
                     </div>
                 </div>
     
-                <div class="inputGroup requireDeletion">
-                    <input style="display: none;" type="text" id="colorInput" value="red">
-                </div>
+                <input name="color" type="text" id="colorInput" required="" value="red" style="display: none;"></input>
+ 
     
                 <section id="colors">
                     <div class="color selected" id="red"></div>
@@ -72,63 +72,63 @@
             <!-- ETAPA 2: Redes sociais -->
             <section style="display: none;" class="steps" id="step2">
                 <div class="inputGroup inputSocial requireDeletion" id="social0">
-                    <input name="instagram" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <input name="instagram" type="text" value="" placeholder="Digite seu usuário aqui..." autocomplete="off">
                     <label for="instagram">Instagram</label>
                     <div class="icon">
                         <i class="iconContent fa-brands fa-instagram"></i>
                     </div>
                 </div>
                 <div class="inputGroup inputSocial requireDeletion" id="social1">
-                    <input name="linkedin" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <input name="linkedin" type="text" value="" placeholder="Digite seu usuário aqui..." autocomplete="off">
                     <label for="linkedin">LinkedIn</label>
                     <div class="icon">
                         <i class="iconContent fa-brands fa-square-linkedin"></i>
                     </div>
                 </div>
                 <div class="inputGroup inputSocial requireDeletion" id="social2">
-                    <input name="x" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <input name="x" type="text" value="" placeholder="Digite seu usuário aqui..." autocomplete="off">
                     <label for="x">X/Twitter</label>
                     <div class="icon">
                         <i class="iconContent fa-brands fa-x-twitter"></i>
                     </div>
                 </div>
                 <div class="inputGroup inputSocial requireDeletion" id="social3">
-                    <input name="github" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <input name="github" type="text" value="" placeholder="Digite seu usuário aqui..." autocomplete="off">
                     <label for="github">GitHub</label>
                     <div class="icon">
                         <i class="iconContent fa-brands fa-github"></i>
                     </div>
                 </div>
                 <div class="inputGroup inputSocial requireDeletion" id="social4">
-                    <input name="youtube" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <input name="youtube" type="text" value="" placeholder="Digite seu usuário aqui..." autocomplete="off">
                     <label for="youtube">YouTube</label>
                     <div class="icon">
                         <i class="iconContent fa-brands fa-youtube"></i>
                     </div>
                 </div>
                 <div class="inputGroup inputSocial requireDeletion" id="social5">
-                    <input name="discord" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <input name="discord" type="text" value="" placeholder="Digite seu usuário aqui..." autocomplete="off">
                     <label for="discord">Discord</label>
                     <div class="icon">
                         <i class="iconContent fa-brands fa-discord"></i>
                     </div>
                 </div>
                 <div class="inputGroup inputSocial requireDeletion" id="social6">
-                    <input name="steam" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <input name="steam" type="text" value="" placeholder="Digite seu usuário aqui..." autocomplete="off">
                     <label for="steam">Steam</label>
                     <div class="icon">
                         <i class="iconContent fa-brands fa-steam"></i>
                     </div>
                 </div>
                 <div class="inputGroup inputSocial requireDeletion" id="social7">
-                    <input name="facebook" type="text"value="" placeholder="Digite seu usuário aqui...">
+                    <input name="facebook" type="text"value="" placeholder="Digite seu usuário aqui..." autocomplete="off">
                     <label for="facebook">Facebook</label>
                     <div class="icon">
                         <i class="iconContent fa-brands fa-facebook"></i>
                     </div>
                 </div>
                 <div class="inputGroup inputSocial requireDeletion" id="social8">
-                    <input name="tiktok" type="text" value="" placeholder="Digite seu usuário aqui...">
+                    <input name="tiktok" type="text" value="" placeholder="Digite seu usuário aqui..." autocomplete="off">
                     <label for="tiktok">TikTok</label>
                     <div class="icon">
                         <i class="iconContent fa-brands fa-tiktok"></i>
@@ -170,11 +170,11 @@
         </div>
         
         <!-- MODAL DE LINK PERSONALIZADO -->
-        <dialog>
+        <dialog open="false">
             <h1>Adicionar link</h1>
             
             <div class="inputGroup">
-                <input class="required" type="text" required="" value="" id="linkName">
+                <input class="required" type="text" required="" value="" id="linkName" autocomplete="off">
                 <label>Nome do link</label>
                 <div class="icon">
                     <i class="iconContent" data-lucide="id-card-lanyard"></i>
@@ -182,7 +182,7 @@
             </div>
             
             <div class="inputGroup">
-                <input class="required" type="text" required="" value="" id="linkUrl">
+                <input class="required" type="text" required="" value="" id="linkUrl" autocomplete="off">
                 <label>URL do link</label>
                 <div class="icon">
                     <i class="iconContent" data-lucide="link"></i>
@@ -191,7 +191,7 @@
             </div>
 
             <div class="inputGroup">
-                <input class="required" type="text" required="" value="" id="linkBio">
+                <input class="required" type="text" required="" value="" id="linkBio" autocomplete="off">
                 <label>Breve descrição</label>
                 <div class="icon">
                     <i class="iconContent" data-lucide="pencil"></i>
@@ -199,7 +199,7 @@
             </div>
             
             <div class="inputGroup">
-                <input type="text" required="" id="linkEmoji" disabled placeholder="Escolha um emoji abaixo...">
+                <input type="text" required="" id="linkEmoji" disabled placeholder="Escolha um emoji abaixo..." autocomplete="off">
                 <label>Emoji escolhido</label>
                 <div class="icon">
                     <i class="iconContent" data-lucide="chess-knight"></i>

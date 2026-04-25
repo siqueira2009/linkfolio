@@ -144,7 +144,7 @@ form #formTitle {
     color: rgb(100, 100, 100);
 }
 
-.inputGroup :is(input:focus, input:valid)~label, .inputGroup :is(input:disabled)~label {
+.inputGroup :is(input:focus, input:valid)~label, .inputGroup :is(input:disabled)~label, .inputGroup :is(input:read-only)~label {
     transform: translateY(-75%) scale(.9);
     margin: 0;
     margin-left: 20.8px;
@@ -169,14 +169,16 @@ form #formTitle {
 
 .inputGroup input:focus ~ .icon .iconContent,
 .inputGroup input:valid ~ .icon .iconContent,
-.inputGroup input:disabled ~ .icon .iconContent {
+.inputGroup input:disabled ~ .icon .iconContent,
+.inputGroup input:read-only ~ .icon .iconContent {
     display: block;
     right: 0;
 }
 
 .inputGroup input:focus, 
 .inputGroup input:valid,
-.inputGroup input:disabled {
+.inputGroup input:disabled,
+.inputGroup input:read-only {
     padding-left: 40px;
 }
 
@@ -364,11 +366,13 @@ form #formTitle {
 
 /* MODAL */
 
-dialog:open {
+dialog[open="true"] {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    opacity: 1;
 
     position: absolute;
     width: 90%;
@@ -382,6 +386,15 @@ dialog:open {
     top: 50%;
 
     transform: translate(-50%, -50%);
+    margin-top: 0px;
+    transition: margin-top 0.5s;
+    z-index: 10;
+}
+
+dialog[open="false"] {
+    margin-top: 1000px;
+    z-index: -10;
+    transition: margin-top 0.5s;
 }
 
 dialog h1 {

@@ -8,9 +8,9 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { name, pronouns, at, bio, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, customLinks } = req.body;
+    const { name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, customLinks } = req.body;
 
-    controllers.createProfile(req, res, name, bio, pronouns, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, customLinks);
+    controllers.createProfile(req, res, name, bio, color, pronouns, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, customLinks);
 })
 
 export default router;
