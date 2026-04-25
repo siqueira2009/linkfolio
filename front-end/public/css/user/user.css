@@ -16,7 +16,7 @@ body {
     align-items: center;
 
     min-width: 100dvw;
-    min-height: 100dvh;
+    height: 100dvh;
 
     background: radial-gradient(ellipse at top, #0f0f1a 0%, #0a0a0f 60%);
 
@@ -99,8 +99,6 @@ body:has(main#color-orange) .bgModified { background-color: rgba(230, 126, 34,  
 
 body:has(main#color-yellow) .bgModified { background-color: rgba(241, 196, 15,  0.15); }
 
-
-
 .topic {
     align-self: start;
     font-size: 20px;
@@ -122,7 +120,7 @@ main {
     gap: 20px;
 
     width: 28%;
-    height: 95%;
+    height: 90%;
 
     background-color: transparent;
     position: relative;
@@ -229,6 +227,10 @@ main * {
 }
 
 /* REDES SOCIAIS */
+
+.noLinkSocial {
+    width: 100%;
+}
 
 #userSocials {
     width: 100%;

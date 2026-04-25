@@ -55,22 +55,27 @@
                 <% const socials = ["Instagram", "LinkedIn", "X/Twitter", "GitHub", "YouTube", "Discord", "Steam", "Facebook", "TikTok"]%>
                 <% const socialLogos = ["fa-instagram", "fa-square-linkedin", "fa-x-twitter", "fa-github", "fa-youtube", "fa-discord", "fa-steam", "fa-facebook", "fa-tiktok"] %>
                 <% const socialUrls = ["https://www.instagram.com/", "https://www.linkedin.com/in/", "https://x.com/", "https://github.com/", "https://www.youtube.com/@", "https://discord.com/users/", "https://steamcommunity.com/id/", "https://www.facebook.com/", "https://www.tiktok.com/@"]; %>
+                <% let totalSocials = socials.length %>
                 <% for (let i = 0; i < 9; i++) { %>
                     <% if (user[socials[i]] != "") { %>
                         <a class="socialMedia" href="<%= socialUrls[i] %><%= user[socials[i]]%>" target="_blank" rel="noopener noreferrer">
                             <i class="fa-brands <%= socialLogos[i] %>"></i>
                             <p><%= socials[i]%></p>
                         </a>
+                        <% totalSocials-- %>
                     <% } %>
-                <% } %>
-
+                <% } %>                
             </div>
+            <% if (totalSocials == socials.length) { %>
+                <h2 class="noLinkSocial">Nenhuma rede social adicionada!</h2>
+            <% } %>
         </section>
         
         <!-- Seção de links personalizados do usuário -->
         <section id="userLinks">
             <p class="topic"><span class="colorModified">Links</span> em destaque</p>
             <div id="linksContainer">
+                <% let totalLinks = user.links.length %>
                 <% for (let i = 0; i < user.links.length; i++) {%>
                 <a class="link" href="http://<%= user.links[i].url %>" target="_blank" rel="noopener noreferrer">
                     <div class="linkIcon bgModified"><%= user.links[i].emoji %></div>
@@ -80,8 +85,12 @@
                     </div>
                     <i data-lucide="chevron-right"></i>
                 </a>
+                <% totalLinks-- %>
                 <% } %>
             </div>
+            <% if (totalLinks == user.links.length) { %>
+                <h2 class="noLinkSocial">Nenhum link personalizado adicionado!</h2>
+            <% } %>
         </section>
     </main>
 
