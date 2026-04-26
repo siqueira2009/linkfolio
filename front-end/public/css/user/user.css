@@ -1,5 +1,4 @@
 /* CONFIGURAÇÕES GLOBAIS */
-
 @import url('https://fonts.cdnfonts.com/css/cabinet-grotesk');
 
 * {
@@ -172,7 +171,6 @@ button:disabled {
 }
 
 /* CORES DE FUNDO */
-
 body:has(main#color-red)::before,
 body:has(main#color-red)::after { background: radial-gradient(circle, rgba(255, 77,  77,  0.05) 0%, transparent 65%); }
 main#color-red::before { background: radial-gradient(circle, rgba(255, 77,  77,  0.1) 0%, transparent 65%); }
@@ -224,7 +222,6 @@ body:has(main#color-orange) .bgModified, body:has(main#color-orange) .bgModified
 body:has(main#color-yellow) .bgModified, body:has(main#color-yellow) .bgModifiedHover:hover { background-color: rgba(241, 196, 15,  0.15); }
 
 /* MAIN */
-
 main {
     display: flex;
     flex-direction: column;
@@ -258,8 +255,7 @@ main * {
     color: rgba(255, 255, 255, 0.877);
 }
 
-/* SITE INDISPONÍVEL */
-
+/* INDISPONÍVEL */
 #unavailabe {
     display: none;
     flex-direction: column;
@@ -269,7 +265,6 @@ main * {
 }
 
 /* PERFIL */
-
 #profile {
     display: flex;
     justify-content: center;
@@ -310,7 +305,6 @@ main * {
 }
 
 /* ESTATÍSTICAS DE PERFIL */
-
 #userStats {
     display: flex;
     align-items: center;
@@ -340,7 +334,6 @@ main * {
 }
 
 /* REDES SOCIAIS */
-
 .noLinkSocial {
     width: 100%;
 }
@@ -383,7 +376,6 @@ main * {
 }
 
 /* LINKS PERSONALIZADOS */
-
 #userLinks {
     display: flex;
     justify-content: center;
@@ -441,7 +433,6 @@ main * {
 }
 
 /* EDITAR PERFIL */
-
 #editProfile {
     width: 40px;
     height: 40px;

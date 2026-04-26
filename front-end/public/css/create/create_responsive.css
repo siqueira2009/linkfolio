@@ -1,11 +1,11 @@
 /* Telas entre 0px e 350px de largura */
 @media screen and (max-width: 350px) {
     /* MAIN */
-
     main {
         display: none;
     }
-
+    
+    /* INDISPONÍVEL */
     #unavailabe {
         display: flex;
     }
@@ -14,20 +14,17 @@
 /* Telas entre 350px e 450px de largura */
 @media screen and (min-width: 350px) and (max-width: 450px) {
     /* CONFIGURAÇÕES GLOBAIS */
-    
     body {
         padding: 15px;
     }
 
     /* MAIN */
-
     main {
         width: 100%;
         gap: 10px;
     }
 
     /* FORMULÁRIO */
-
     form #formTitle {
         color: white;
         font-size: 35px;
@@ -54,7 +51,6 @@
     }
 
     /* ETAPA 1 */
-
     #colors .color {
         aspect-ratio: 1/1;
         height: 45px;
@@ -70,7 +66,6 @@
     }
 
     /* ETAPA 3 */
-    
     #nenhumLink {
         text-align: center;
         color: white;
@@ -86,7 +81,6 @@
     }
 
     /* MODAL */
-    
     dialog h1 {
         font-size: 28px;
     }
@@ -110,20 +104,17 @@
 /* Telas entre 450px e 550px de largura */
 @media screen and (min-width: 450px) and (max-width: 550px) {
     /* CONFIGURAÇÕES GLOBAIS */
-
     body {
         padding: 15px;
     }
 
     /* MAIN */
-
     main {
         width: 100%;
         gap: 10px;
     }
 
     /* ETAPA 2 */
-
     #colors {
         padding: 0px 3px;
     }
@@ -132,7 +123,6 @@
 /* Telas entre 550px e 700px de largura */
 @media screen and (min-width: 550px) and (max-width: 700px) {
     /* MAIN */
- 
     main {
         width: 90%;
     }
@@ -142,7 +132,6 @@
 /* Telas entre 700px e 1000px de largura */
 @media screen and (min-width: 700px) and (max-width: 1000px) {
     /* MAIN */
-    
     main {
         width: 70%;
     }
@@ -151,7 +140,6 @@
 /* Telas entre 1000px e 1300px de largura */
 @media screen and (min-width: 1000px) and (max-width: 1300px) {
     /* MAIN */
-
     main {
         width: 50%;
     }
@@ -160,7 +148,6 @@
 /* Telas entre 1300px e 1400px de largura */
 @media screen and (min-width: 1300px) and (max-width: 1400px) {
     /* MAIN */
-    
     main {
         width: 40%;
     }

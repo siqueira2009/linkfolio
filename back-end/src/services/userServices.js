@@ -1,25 +1,26 @@
 import fs from 'fs';
-import { UserModel, SocialsModel } from '../models/userModels.js'
+import { UserModel, SocialsModel } from '../models/userModels.js' // Importa os modelos de usuário e redes sociais
 
-const jsonTaskPath = 'src/data/users.json';
+const jsonUserPath = 'src/data/users.json'; // Caminho do JSON com os dados do usuário
 
-var users = [];
+var users = []; // Variável que guarda os valores dos usuários (do JSON)
 
-try {
-    const data = fs.readFileSync(jsonTaskPath, 'utf-8');
+try { // Tenta ler o arquivo JSON com os valores dos usuários
+    const data = fs.readFileSync(jsonUserPath, 'utf-8');
     users = JSON.parse(data);
     if (!Array.isArray(users)) users = [];
-} catch (err) {
-    console.log("Erro ao ler arquivo JSON, criando novo: " + err);
-    fs.writeFileSync(jsonTaskPath, "[]", 'utf-8');
+} catch (error) { // Caso dê erro, mostra o erro e faz a variável ser vazia e cria um arquivo novo e vazio
+    console.error("Erro ao ler arquivo JSON, criando novo:", error);
+    fs.writeFileSync(jsonUserPath, "[]", 'utf-8');
     users = [];
 }
 
-let idCounter = users.length;
+let idCounter = users.length; // Variável que guarda os IDs
 
+// Função para atualizar o arquivo JSON
 function updateJSON() {
-    try {
-        for (let i = 0; i < users.length; i++) {
+    try { // Tenta atualizar o arquivo
+        for (let i = 0; i < users.length; i++) { // Para cada chave do Array de dados dos usuários, remove espaços do início e fim
             const userKeys = Object.keys(users[i]);
             const userValues = Object.values(users[i]);
 
@@ -30,22 +31,25 @@ function updateJSON() {
             }
         }
 
-        fs.writeFileSync(jsonTaskPath, JSON.stringify(users, null, 2), 'utf-8');
-    } catch (err) {
-        console.log('Erro ao editar arquivo JSON: ' + err);
+        fs.writeFileSync(jsonUserPath, JSON.stringify(users, null, 2), 'utf-8'); // Atualiza o JSON com os dados da variável
+    } catch (error) { // Caso dê erro, mostra o erro
+        console.log('Erro ao editar arquivo JSON: ' + error);
     }
 };
 
+// Função para pegar o arroba do usuário passado
 function getAt(user) {
     return user.at;
 }
 
+// Função para pegar os dados do usuário pelo arroba passado
 function getUserByAt(at) {
     const nedeedUser = users.find(u => u.at == at);
 
     return nedeedUser;
 }
 
+// Função para atualizar as visualizações no Array/JSON do usuário com arroba passado
 function updateViews(at) {
     const nedeedUser = users.find(u => u.at == at);
 
@@ -55,6 +59,7 @@ function updateViews(at) {
     return nedeedUser;
 }
 
+// Função para atualizar os cliques no Array/JSON do usuário com arroba passado
 function updateClicks(at) {
     const nedeedUser = users.find(u => u.at == at);
 
@@ -64,55 +69,72 @@ function updateClicks(at) {
     return nedeedUser;
 }
 
+// Função para atualizar dados do usuário com arromba passado
 function updateUser(at, bodyData) {
-    const neededUserIndex = users.findIndex(u => u.at == at);
-    const userId = users.find(u => u.at == at).id;
-    const userPassword = users.find(u => u.at == at).password;
+    const neededUserIndex = users.findIndex(u => u.at == at); 
+    const user  = users.find(u => u.at == at);
+    const userId = user.id;
+    const userPassword = user.password;
+    const userViews = user.views;
+    const userClicks = user.clicks;
 
-    users.splice(neededUserIndex, 1);
+    users.splice(neededUserIndex, 1); // Remove o usuário
 
+    // Cria novos objetos com os dados novos
     const userDetails = new UserModel(userId, bodyData.name, bodyData.pronouns, at, bodyData.bio, userPassword, bodyData.color);
     const userSocials = new SocialsModel(bodyData.instagram, bodyData.linkedin, bodyData.x, bodyData.github, bodyData.youtube, bodyData.discord, bodyData.steam, bodyData.facebook, bodyData.tiktok);
     const userLinks = Array.isArray(bodyData.links) ? bodyData.links : [];
+
+    // Cria um novo objeto do novo usuário com todos os dados novos
     const newUser = {...userDetails, ...userSocials};
-
     newUser.links = userLinks;
+    newUser.views = userViews;
+    newUser.clicks = userClicks;
 
+    // Adiciona esse usuário na mesma posição do removido (substitui)
     users.splice(neededUserIndex, 0, newUser);
     updateJSON();
     return newUser.id;
 }
 
+// Função para criar usuário com os dados passados
 function postUser(bodyData) {
-    const allAts = users.map(getAt);
+    const allAts = users.map(getAt); // Cria um Array com todos os arrobas existentes
 
+    // Vê se o Array possui o arroba passado
     if (allAts.includes(bodyData.at)) {
-        return "duplicated"
+        return "duplicated"; // Se possuir, retorna "duplicated"
     }
 
+    // Caso não exista, cria novos objetos com os dados passados
     const userDetails = new UserModel(idCounter, bodyData.name, bodyData.pronouns, bodyData.at, bodyData.bio, bodyData.password, bodyData.color);
     const userSocials = new SocialsModel(bodyData.instagram, bodyData.linkedin, bodyData.x, bodyData.github, bodyData.youtube, bodyData.discord, bodyData.steam, bodyData.facebook, bodyData.tiktok);
     const userLinks = Array.isArray(bodyData.links) ? bodyData.links : [];
-    const newUser = {...userDetails, ...userSocials};
 
+    // Cria um objeto com todos os dados
+    const newUser = {...userDetails, ...userSocials};
     newUser.links = userLinks;
 
+    // Adiciona esse objeto no Array de dados e atualiza o JSON
     users.push(newUser);
     updateJSON();
     idCounter++;
     return newUser.id;
 }
 
+// Função para deletar usuário com arroba passado
 function deleteUser(at) {
-    const index = users.findIndex(u => u.at == at);
+    const userIndex = users.findIndex(u => u.at == at); // Encontra a posição do usuário
 
-    idCounter--;
-    users.splice(index, 1);
+    // Remove ele do Array de dados dos usuários e atualiza o JSON
+    idCounter--; 
+    users.splice(userIndex, 1);
     updateJSON();
 
-    return index;
+    return userIndex;
 }
 
+// Exporta as funções
 export {
     getUserByAt,
     postUser,

@@ -2,6 +2,7 @@ import express from 'express';
 import { fileURLToPath } from "url";
 import path from 'path';
 
+// Importa os Routers
 import user from './src/routes/profileRoutes.js';
 import createProfile from './src/routes/createRoutes.js'
 
@@ -25,11 +26,12 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use('/u', user);
 app.use('/create', createProfile);
 
-// Para rota inexistente
+// Para a rota padrão (/)
 app.use('/', (req, res) => {
     res.redirect('/create')
 })
 
+// Para quando a rota não existe
 app.use((req, res) => {
   res.status(404).json({
     erro: 'Rota não encontrada',
@@ -37,9 +39,9 @@ app.use((req, res) => {
   });
 });
 
-const PORT = 3001;
 
 // Faz o servidor ouvir (ficar de pé)
+const PORT = 3001;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`✅ Servidor FRONT-END iniciado em localhost:${PORT}`);
 })

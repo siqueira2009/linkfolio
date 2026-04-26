@@ -1,20 +1,16 @@
 import express from 'express';
-import * as controllers from '../controllers/profileControllers.js'
+import * as controllers from '../controllers/profileControllers.js' // Importa funções de controle
 
-const router = express.Router();
+const router = express.Router(); // Cria um Router
 
+// Rota com método GET (pega os dados do usuário e carrega a página)
 router.get('/:at', async (req, res) => {
     const at = req.params.at;
 
-    const user = await controllers.getUser(req, res, at)
-
-    if (!user) {
-        res.redirect('/create');
-    } else {
-        res.render('pages/user.ejs', {user})
-    }
+    await controllers.getUser(req, res, at); // Pega os dados do usuário
 });
 
+// Rota com método POST (para edição de dados)
 router.post('/:at', (req, res) => {
     const at = req.params.at;
     const bodyData = req.body;
@@ -22,4 +18,5 @@ router.post('/:at', (req, res) => {
     controllers.updateUser(req, res, at, bodyData);
 })
 
+// Exporta o router para ser usado no app.js
 export default router;

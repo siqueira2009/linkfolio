@@ -1,3 +1,4 @@
+// Classe do usuário
 class UserModel {
     constructor(id, name, pronouns, at, bio, password, color) {
         this.id = id,
@@ -12,6 +13,7 @@ class UserModel {
     }
 }
 
+// Classe das redes sociais do usuário
 class SocialsModel {
     constructor(instagram = null, linkedin = null, x = null, github = null, youtube = null, discord = null, steam = null, facebook = null, tiktok = null) {
         this.Instagram = instagram,
@@ -26,6 +28,7 @@ class SocialsModel {
     }
 }
 
+// Exporta as Classes para serem usadas nas funções de serviço
 export {
     UserModel,
     SocialsModel

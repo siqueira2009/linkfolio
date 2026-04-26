@@ -1,11 +1,11 @@
 /* Telas entre 0px e 350px de largura */
 @media screen and (max-width: 350px) {
     /* MAIN */
-
     main {
         display: none;
     }
 
+    /* INDISPONÍVEL */
     #unavailabe {
         display: flex;
     }
@@ -13,15 +13,18 @@
 
 /* Telas entre 350px e 450px de largura */
 @media screen and (min-width: 350px) and (max-width: 450px) {
+    /* CONFIGURAÇÕES GLOBAIS */
     body {
         padding: 15px;
     }
 
+    /* MAIN */
     main {
         width: 100%;
         gap: 10px;
     }
 
+    /* PERFIL */
     #profile .userIcon {
         display: flex;
         justify-content: center;
@@ -52,7 +55,7 @@
         font-size: 16px;
     }
 
-
+    /* ESTATÍSTICAS */
     #userStats {
         width: 100%;
         margin-top: 20px;
@@ -82,6 +85,7 @@
         font-size: 14px;
     }
 
+    /* REDES SOCIAIS */
     #userSocials .socialMedia i {
         font-size: 20px;
     }
@@ -89,7 +93,8 @@
     #userSocials .socialMedia p {
         font-size: 14px
     }
-    
+
+    /* LINKS PERSONALIZADOS */
     #userLinks {
         display: flex;
         flex-direction: column;
@@ -143,7 +148,7 @@
         font-size: 12px;
     }
 
-    /* Editar perfil */
+    /* EDITAR PERFIL */
     dialog[open="true"] {
         width: 95%;
     }
@@ -223,15 +228,18 @@
 
 /* Telas entre 450PX e 600px de largura */
 @media screen and (min-width: 450px) and (max-width: 600px) {
+    /* BODY */
     body {
         padding: 15px;
     }
 
+    /* MAIN */
     main {
         width: 100%;
         gap: 10px;
     }
 
+    /* PERFIL */
     #profile .userIcon {
         display: flex;
         justify-content: center;
@@ -262,7 +270,7 @@
         font-size: 16px;
     }
 
-
+    /* ESTATÍSTICA */
     #userStats {
         width: 100%;
         margin-top: 20px;
@@ -292,6 +300,7 @@
         font-size: 14px;
     }
 
+    /* LINKS PERSONALIZADOS */
     #userLinks {
         display: flex;
         flex-direction: column;
@@ -345,7 +354,7 @@
         font-size: 12px;
     }
 
-    /* Editar perfil */
+    /* EDITAR PERFIL */
     dialog[open="true"] {
         width: 95%;
     }
@@ -425,15 +434,17 @@
 
 /* Telas entre 600px e 900px de largura */
 @media screen and (min-width: 600px) and (max-width: 900px) {
+    /* BODY */
     body {
         padding: 15px;
     }
 
+    /* MAIN */
     main {
         width: 100%;
     }
 
-    /* Editar perfil */
+    /* EDITAR PERFIL */
     dialog[open="true"] {
         width: 90%;
     }
@@ -441,10 +452,12 @@
 
 /* Telas entre 900px e 1700px de largura */
 @media screen and (min-width: 900px) and (max-width: 1700px) {
+    /* BODY */
     body {
         padding: 15px;
     }
 
+    /* MAIN */
     main {
         width: 50%;
     }

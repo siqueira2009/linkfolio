@@ -16,6 +16,7 @@
         <h3>🤏 Sua tela é muito pequena<h3>
     </div>
 
+    <!-- CONTEÚDO PRINCIPAL DA PÁGINA -->
     <main id="color-<%=user.color%>">
         <!-- Seção do perfil (foto, nome, arroba e sobre) -->
         <section id="profile">
@@ -42,7 +43,7 @@
                 <% if (user.views == 0 && user.clicks == 0) { %>
                     <h1 class="colorModified">0%</h1>
                 <% } else { %>
-                    <h1 id="ctr" class="colorModified"><%=((user.clicks / user.views) * 100).toFixed(1)%>%</h1>
+                    <h1 id="ctr" class="colorModified"><%=Math.min((user.clicks / user.views) * 100, 100).toFixed(0)%>%</h1>
                 <% } %>
                 <p>CTR</p>
             </article>
@@ -96,10 +97,12 @@
         <!-- Botão de editar -->
         <i class="bgModifiedHover" id="editProfile" data-lucide="sliders-horizontal"></i>
 
-        <dialog open="true">
+        <!-- MODAL COM OPÇÕES DE EDIÇÃO -->
+        <dialog open="false">
             <h1>Editar perfil</h1>
                     
             <form method="POST">
+                <!-- INFORMAÇÕES PESSOAIS -->
                 <div class="inputGroup" style="margin: 0; margin-top: 16px;">
                     <input class="required" name="name" type="text" required="" value="<%= user.name %>" autocomplete="off">
                     <label for="name">Seu nome<span class="required">*</span></label>
@@ -124,6 +127,7 @@
                     </div>
                 </div>
     
+                <!-- COR -->
                 <div id="colors">
                     <div class="color selected" id="red"></div>
                     <div class="color" id="green"></div>
@@ -133,6 +137,7 @@
                     <div class="color" id="yellow"></div>
                 </div>
 
+                <!-- REDES SOCIAIS -->
                 <p class="topic"><span class="colorModified">Redes</span> sociais</p>
                 <div id="editSocials">
                     <div class="inputGroup inputSocial requireDeletion" id="social0">
@@ -200,6 +205,7 @@
                     </div>
                 </div>
 
+                <!-- LINKS PERSONALIZADOS -->
                 <p class="topic" style="margin-top: 16px;"><span class="colorModified">Links</span> atuais</p>
                 <div id="editLinks">
                     <% for (let i = 0; i < user.links.length; i++) { %>
@@ -214,6 +220,7 @@
                     <% } %>
                 </div>
 
+                <!-- ADICIONAR LINKS -->
                 <p class="topic" style="margin-top: 16px;"><span class="colorModified">Adicionar</span> Links</p>
                 <div id="addLinks">
                     <div class="inputGroup">
@@ -253,10 +260,12 @@
                     <button type="button" id="addLink" disabled="true">Adicionar link</button>
                 </div>
 
+                <!-- INPUTS ESCONDIDOS (GUARDAM COR E LINKS) -->
                 <input name="color" type="text" id="colorInput" required="" value="<%= user.color %>" style="display: none;"></input>
                 <input style="display: none" type="text" name="customLinks" id="customLinksInput" value="<%= JSON.stringify(user.links) %>">
             </form>
             
+            <!-- BOTÕES DE CANCELAR E SALVAR -->
             <div class="buttonsContainer" id="linkButtons">
                 <button type="button" id="cancelEdit">Cancelar</button>
                 <button type="submit" id="saveEdit">Salvar</button>

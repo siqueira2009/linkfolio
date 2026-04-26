@@ -30,7 +30,7 @@ function reset() { // Função que reseta a página (inputs etc.)
 // 1️⃣ FUNÇÕES DE LÓGICA
 // =================================================
 
-const socialColors = {
+const socialColors = { // Objeto que guarda as cores das redes sociais
   "LinkedIn": "#0A66C2",
   "Instagram": "#DD2A7B",
   "X/Twitter": "#1DA1F2",
@@ -42,8 +42,8 @@ const socialColors = {
   "TikTok": "#EE1D52"
 };
 
-let pickedEmoji = false;
-let customLinksArray = JSON.parse(document.getElementById('customLinksInput').value);
+let pickedEmoji = false; // Variável que guarda se já escolheu emoji no modal de edição
+let customLinksArray = JSON.parse(document.getElementById('customLinksInput').value); // Array com os links existentes
 
 function socialColorsEnter(btn) { // Função que coloca cor no ícone e texto da rede social
     const icon = btn.querySelector('i');
@@ -69,11 +69,9 @@ function socialColorsOut(btn) { // Função que remove cor no ícone e texto da 
     p.style.textDecoration = '';
 }
 
-async function clickUpdater() {
+async function clickUpdater() { // Função que atualiza os cliques - fetch na API
     const at = document.querySelector('.userAt').textContent.replace('@', '');
-
-    console.log(at)
-
+    
     try {
         const response = await fetch(`http://localhost:3000/user/${at}/clicks`, {
             method: "PUT"
@@ -89,9 +87,10 @@ async function clickUpdater() {
     }
 }
 
-async function updateInfo() {
+async function updateInfo() { // Função que atualiza as informações (Cliques e CTR) - fetch na API
     const ctr = document.getElementById('ctr');
     const clicks = document.getElementById('clicks');
+    const views = document.getElementById('views');
 
     const at = document.querySelector('.userAt').textContent.replace('@', '');
     try {
@@ -104,12 +103,14 @@ async function updateInfo() {
     
         const data = await response.json();
     
+        const ctrValue = (data.clicks / data.views) * 100;
+        const limitedCtr = Math.min(ctrValue, 100).toFixed(0);
         clicks.textContent = data.clicks;
-        ctr.textContent = ((data.clicks / data.views) * 100).toFixed(1) +  '%'
+        views.textContent = data.views;
+        ctr.textContent = limitedCtr + '%'
     } catch (error) {
         console.error('Falha ao atualizar clicks, visualizações e CTR:', error);
     }
-
 }
 
 function closeModal() { // Função que fecha o modal de adicionar link personalizado
@@ -130,7 +131,7 @@ function closeModal() { // Função que fecha o modal de adicionar link personal
     addButton.setAttribute('disabled', 'true')
 }
 
-function removeLink(event) {
+function removeLink(event) { // Função que remove links na parte de edição
     const target = event.target;
     const parent = target.closest('.editLink');
     const name = parent.querySelector('.title');
@@ -144,7 +145,7 @@ function removeLink(event) {
     parent.remove();
 }
 
-function addLink(name, url, emoji, bio) {
+function addLink(name, url, emoji, bio) { // Função que adiciona links na parte de edição
     const newLink = {
         "name": name,
         "url": url,
@@ -174,7 +175,7 @@ function addLink(name, url, emoji, bio) {
     customLinksInput.value = JSON.stringify(customLinksArray)
 }
 
-function verifyFieldsLinks() {
+function verifyFieldsLinks() { // Função que verifica os inputs de links
     const inputs = document.querySelectorAll('#addLinks input.required');
     let allValid = false;
 
@@ -196,7 +197,7 @@ function verifyFieldsLinks() {
     }
 }
 
-async function editPassword() {
+async function verifyPassword() { // Função que pede a senha na hora de editar perfil
     function openModal() { // Função que abre o modal de adicionar link personalizado
         const sections = document.querySelectorAll('section');
 
@@ -246,11 +247,9 @@ function selectColor(currentColor) { // Função que administra a seleção de c
     colorInput.value = currentColor.id;
 
     colorInput.dispatchEvent(new Event("change"))
-
-    console.log(colorInput.value)
 }
 
-function updateColor() {
+function updateColor() { // Função que atualiza a cor no modal de edição
     const colorInput = document.getElementById("colorInput");
     const currentColor = colorInput.value;
     const color = document.getElementById(currentColor)
@@ -271,11 +270,11 @@ function editEvent() { // Adiciona os event listeners no botão de abrir modal
     const editButton = document.getElementById("editProfile");
 
     editButton.addEventListener('click', () => {
-        editPassword();
+        verifyPassword();
     })
 }
 
-function clickEvents() {
+function clickEvents() { // Adiciona os eventos ao clicar em algum link (a), para atualiza o campo de cliques
     const a = document.querySelectorAll('a');
 
     a.forEach(a => {
@@ -288,7 +287,7 @@ function clickEvents() {
     });
 }
 
-function socialEvents() { // Função que adiciona os event listeners quando colocar ou tirar o mouse de cima da rede social
+function socialEvents() { // Adiciona o eventos de quando colocar ou tirar o mouse de cima da rede social
     const socialButtons = document.querySelectorAll('.socialMedia');
 
     socialButtons.forEach(btn => {
@@ -308,7 +307,7 @@ function removeLinksEvent(targetLink) { // Adiciona os event listeners nos botõ
     removeBtn.addEventListener('click', removeLink);
 }
 
-function removeLinkEvent() {
+function removeLinkEvent() { // Adiciona evento para remover link na aba de edição
     const removeIcons = document.querySelectorAll('.removeLink');
 
     removeIcons.forEach(removeIcon => {
@@ -318,7 +317,7 @@ function removeLinkEvent() {
     });
 }
 
-function addLinkEvent() {
+function addLinkEvent() { // Adiciona evento para adicionar link na aba de edição
     const addLinkBtn = document.getElementById('addLink');
 
     const name = document.getElementById('linkName');
@@ -342,7 +341,7 @@ function emojiPickerEvent() { // Adiciona os event listeners no seletor de emoji
     });
 }
 
-function verifyInputsEvent() {
+function verifyInputsEvent() { // Adiciona evento para verificar os valores de inputs
     const inputs = document.querySelectorAll('#addLinks input');
 
     inputs.forEach(input => {
@@ -352,7 +351,7 @@ function verifyInputsEvent() {
     })
 }
 
-function submitEvent() {
+function submitEvent() { // Adiciona evento para enviar o formulário de edição de perfil
     const saveBtn = document.getElementById('saveEdit');
 
     saveBtn.addEventListener('click', () => {
@@ -370,16 +369,9 @@ function colorsEvents() { // Adiciona os event listeners nas cores
     })
 }
 
-
-// =================================================
-// 3️⃣ FUNÇÃO QUE RODA QUANDO A PÁGINA É CARREGADA
-// =================================================
-
-document.addEventListener('DOMContentLoaded', () => {
-    reset(); // Chama a função de reset
-    animation(); // Chama a função de animação
-
-    socialEvents(); // Configura o event listener de rede social
+// Função que junta todos as funções de event listeners
+function allEvents() { // Chama todas elas aqui dentro (menos a de remover link, que é chamada sempre que um novo link é criado)
+    socialEvents();
     clickEvents();
     editEvent();
     closeEvent();
@@ -390,4 +382,16 @@ document.addEventListener('DOMContentLoaded', () => {
     submitEvent();
     colorsEvents();
     updateColor();
+}
+
+
+// =================================================
+// 3️⃣ FUNÇÃO QUE RODA QUANDO A PÁGINA É CARREGADA
+// =================================================
+
+document.addEventListener('DOMContentLoaded', () => {
+    reset(); // Chama a função de reset
+    animation(); // Chama a função de animação
+
+    allEvents();
 })

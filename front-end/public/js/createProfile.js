@@ -43,7 +43,7 @@ function reset() { // Função que reseta a página (inputs etc.)
 // 1️⃣ FUNÇÕES DE LÓGICA
 // =================================================
 
-class Link {
+class Link { // Classe de LINK
     constructor(name, url, emoji, bio) {
         this.name = name,
         this.url = url,
@@ -70,9 +70,7 @@ let socials = { // Objeto que guarda o @ de cada rede social (null para vazio)
     'tiktok': null
 }
 
-let customLinksArray = [
-
-]
+let customLinksArray = [] // Array com os links
 
 let currentStep = 0; // Variável que guarda a etapa atual
 let selectedEmoji = false; // Variável que guarda se o emoji foi selecioado
@@ -193,8 +191,6 @@ function selectColor(currentColor) { // Função que administra a seleção de c
     colorInput.value = currentColor.id;
 
     colorInput.dispatchEvent(new Event("change"))
-
-    console.log(colorInput.value)
 }
 
 function social(inputContainer, currentFiel) { // Função que administra as redes sociais (coloca/remove do objeto)
@@ -274,10 +270,10 @@ function addLink() { // Função para adicionar links
     let emoji = dialog.querySelector('#linkEmoji')
     let bio = dialog.querySelector('#linkBio')
 
-    const newLinks = new Link(name.value, url.value, emoji.value, bio.value);
-    customLinksArray.push(newLinks)
-
+    
     if (name.value != "" && url.value != "" && emoji.value != "") {
+        const newLinks = new Link(name.value, url.value, emoji.value, bio.value);
+        customLinksArray.push(newLinks)
         let templateLink = document.getElementById('customLinkTemplate');
         let customLink = templateLink.cloneNode(true);
         customLink.style.display = ''
@@ -321,7 +317,7 @@ function removeLink() { // Função para remover links
     showEmptyLinksMessage();
 }
 
-async function verifyAt() {
+async function verifyAt() { // Função que verifica se o arroba digitado já existe
     const atInput = document.getElementById('atInput');
     const at = atInput.value;
 
@@ -333,14 +329,12 @@ async function verifyAt() {
     });
 
     if (user.ok == true) {
-        console.log("Já existe!")
         atInput.classList.add('atExistente')
         atInput.style.borderColor = "#FF4D4D";
         alert("Esse @ já existe! Tente outro.")
         verifyFields();
         return;
     } else {
-        console.log("Não existe!")
         atInput.classList.remove('atExistente')
         atInput.style.borderColor = "";
         verifyFields();
@@ -426,7 +420,7 @@ function emojiPickerEvent() { // Adiciona os event listeners no seletor de emoji
     });
 }
 
-function atEvent() {
+function atEvent() { // Adiciona evento no input de arroba, para verificar se o digitado já existe
     const atInput = document.getElementById('atInput');
 
     atInput.addEventListener('keyup', verifyAt);

@@ -1,5 +1,4 @@
 /* CONFIGURAÇÕES GLOBAIS */
-
 @import url('https://fonts.cdnfonts.com/css/cabinet-grotesk');
 
 * {
@@ -63,8 +62,7 @@ button:disabled {
     transition: 1s;
 }
 
-/* SITE INDISPONÍVEL */
-
+/* INDISPONÍVEL */
 #unavailabe {
     display: none;
     flex-direction: column;
@@ -74,7 +72,6 @@ button:disabled {
 }
 
 /* MAIN */
-
 main {
     position: relative;
 
@@ -91,7 +88,6 @@ main {
 }
 
 /* FORMULÁRIO */
-
 main form {
     display: flex;
     flex-direction: column;
@@ -187,7 +183,6 @@ form #formTitle {
 }
 
 /* ETAPA 1 */
-
 #colors {
     display: flex;
     justify-content: space-between;
@@ -241,7 +236,6 @@ form #formTitle {
 }
 
 /* ETAPA 2 */
-
 #step2 {
     display: flex;
     flex-direction: column;
@@ -281,7 +275,6 @@ form #formTitle {
 }
 
 /* ETAPA 3 */
-
 #step3 {
     display: flex;
     flex-direction: column;
@@ -365,7 +358,6 @@ form #formTitle {
 }
 
 /* MODAL */
-
 dialog[open="true"] {
     display: flex;
     flex-direction: column;
