@@ -42,6 +42,9 @@ const socialColors = {
   "TikTok": "#EE1D52"
 };
 
+let pickedEmoji = false;
+let customLinksArray = JSON.parse(document.getElementById('customLinksInput').value);
+
 function socialColorsEnter(btn) { // Função que coloca cor no ícone e texto da rede social
     const icon = btn.querySelector('i');
     const p = btn.querySelector('p');
@@ -64,20 +67,6 @@ function socialColorsOut(btn) { // Função que remove cor no ícone e texto da 
 
     p.style.color = 'white';
     p.style.textDecoration = '';
-}
-
-function socialEvents() { // Função que adiciona os event listeners quando colocar ou tirar o mouse de cima da rede social
-    const socialButtons = document.querySelectorAll('.socialMedia');
-
-    socialButtons.forEach(btn => {
-        btn.addEventListener('mouseenter', () => {
-            socialColorsEnter(btn)
-        });
-
-        btn.addEventListener('mouseleave', () => {
-            socialColorsOut(btn)
-        });
-    })
 }
 
 async function clickUpdater() {
@@ -123,6 +112,169 @@ async function updateInfo() {
 
 }
 
+function closeModal() { // Função que fecha o modal de adicionar link personalizado
+    const addButton = document.getElementById('addLink');
+    const dialog = document.querySelector('dialog');
+
+    const sections = document.querySelectorAll('section');
+
+    sections.forEach(section => section.style.filter = 'blur(0px)');
+    
+    dialog.style.marginTop = '1000px';
+
+    setTimeout(() => {
+        dialog.setAttribute('open', 'false');
+        dialog.style.marginTop = '';
+    }, 400)
+
+    addButton.setAttribute('disabled', 'true')
+}
+
+function removeLink(event) {
+    const target = event.target;
+    const parent = target.closest('.editLink');
+    const name = parent.querySelector('.title');
+
+    const linkIndex = customLinksArray.findIndex(l => l.name == name);
+
+    customLinksArray.splice(linkIndex, 1);
+    const customLinksInput = document.getElementById('customLinksInput');
+    customLinksInput.value = JSON.stringify(customLinksArray)
+
+    parent.remove();
+}
+
+function addLink(name, url, emoji, bio) {
+    const newLink = {
+        "name": name,
+        "url": url,
+        "emoji": emoji,
+        "bio": bio
+    }
+
+
+    const linksParent = document.getElementById('editLinks');
+    const newLinkElement = document.createElement('a');
+    newLinkElement.classList.add('link')
+    newLinkElement.classList.add('editLink')
+    newLinkElement.innerHTML = 
+    `
+        <div class="linkIcon bgModified">${emoji}</div>
+        <div class="linkText">
+            <h2 class="title">${name}</h2>
+            <p class="subtitle">${bio}<p>
+        </div>
+        <svg class="removeLinkIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x removeLink"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+    `
+    editLinks.appendChild(newLinkElement);
+    removeLinksEvent(newLinkElement);
+
+    customLinksArray.push(newLink);
+    const customLinksInput = document.getElementById('customLinksInput');
+    customLinksInput.value = JSON.stringify(customLinksArray)
+}
+
+function verifyFieldsLinks() {
+    const inputs = document.querySelectorAll('#addLinks input.required');
+    let allValid = false;
+
+    for (let i = 0; i < inputs.length; i++) {
+        if (inputs[i].value == "") {
+            allValid = false;
+            break;
+        } else {
+            allValid = true;
+        }
+    }
+
+    const addBtn = document.getElementById('addLink');
+
+    if (allValid == true && pickedEmoji == true) {
+        addBtn.removeAttribute('disabled');
+    } else {
+        addBtn.setAttribute('disabled', 'true');
+    }
+}
+
+async function editPassword() {
+    function openModal() { // Função que abre o modal de adicionar link personalizado
+        const sections = document.querySelectorAll('section');
+
+        sections.forEach(section => section.style.filter = 'blur(2px)');
+
+        const dialog = document.querySelector('dialog');
+        dialog.setAttribute('open', 'true');
+        dialog.style.marginTop = '1000px';
+        
+        setTimeout(() => {
+            dialog.style.marginTop = '0px'
+        }, 200)
+    }
+
+    const password = prompt("Digite sua senha");
+    const at = document.querySelector('.userAt').textContent.replace('@', '');
+
+    if (!password) {
+        return;
+    }
+
+    const response = await fetch(`http://localhost:3000/auth/password/${at}`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ password: password })
+    });
+
+    const result = await response.json();
+
+    if (result.resultado) {
+        openModal();
+    } else {
+        alert("Senha incorreta")
+    }
+}
+
+function selectColor(currentColor) { // Função que administra a seleção de cores (e coloca no input)
+    const colors = document.querySelectorAll('.color');
+    const colorInput = document.getElementById('colorInput')
+
+    colors.forEach(color => color.classList.remove('selected'));
+
+    currentColor.classList.add('selected');
+
+    colorInput.value = currentColor.id;
+
+    colorInput.dispatchEvent(new Event("change"))
+
+    console.log(colorInput.value)
+}
+
+function updateColor() {
+    const colorInput = document.getElementById("colorInput");
+    const currentColor = colorInput.value;
+    const color = document.getElementById(currentColor)
+    selectColor(color);
+}
+
+// =================================================
+// 2️⃣ FUNÇÕES QUE CRIAM OS OUVINTES DE EVENTO
+// =================================================
+
+function closeEvent() { // Adiciona os event listeners no botão de fechar modal
+    const closeButton = document.getElementById("cancelEdit");
+
+    closeButton.addEventListener('click', closeModal);
+}
+
+function editEvent() { // Adiciona os event listeners no botão de abrir modal
+    const editButton = document.getElementById("editProfile");
+
+    editButton.addEventListener('click', () => {
+        editPassword();
+    })
+}
+
 function clickEvents() {
     const a = document.querySelectorAll('a');
 
@@ -136,6 +288,89 @@ function clickEvents() {
     });
 }
 
+function socialEvents() { // Função que adiciona os event listeners quando colocar ou tirar o mouse de cima da rede social
+    const socialButtons = document.querySelectorAll('.socialMedia');
+
+    socialButtons.forEach(btn => {
+        btn.addEventListener('mouseenter', () => {
+            socialColorsEnter(btn)
+        });
+
+        btn.addEventListener('mouseleave', () => {
+            socialColorsOut(btn)
+        });
+    })
+}
+
+function removeLinksEvent(targetLink) { // Adiciona os event listeners nos botões de remover links personalizados (depois de criar)
+    const removeBtn = targetLink.querySelector('.removeLinkIcon')
+
+    removeBtn.addEventListener('click', removeLink);
+}
+
+function removeLinkEvent() {
+    const removeIcons = document.querySelectorAll('.removeLink');
+
+    removeIcons.forEach(removeIcon => {
+        removeIcon.addEventListener('click', (event) => {
+            removeLink(event);
+        })
+    });
+}
+
+function addLinkEvent() {
+    const addLinkBtn = document.getElementById('addLink');
+
+    const name = document.getElementById('linkName');
+    const url = document.getElementById('linkUrl');
+    const bio = document.getElementById('linkBio');
+    const emoji = document.getElementById('linkEmoji');
+
+    addLinkBtn.addEventListener('click', () => {
+        addLink(name.value, url.value, emoji.value, bio.value);
+    })
+}
+
+function emojiPickerEvent() { // Adiciona os event listeners no seletor de emojis
+    const emojiInput = document.getElementById('linkEmoji');
+    const emojiPicker = document.querySelector('emoji-picker')
+
+    emojiPicker.addEventListener('emoji-click', event => {
+        emojiInput.value = event.detail.unicode
+        pickedEmoji = true;
+        verifyFieldsLinks();
+    });
+}
+
+function verifyInputsEvent() {
+    const inputs = document.querySelectorAll('#addLinks input');
+
+    inputs.forEach(input => {
+        input.addEventListener('keyup', () => {
+            verifyFieldsLinks();
+        })
+    })
+}
+
+function submitEvent() {
+    const saveBtn = document.getElementById('saveEdit');
+
+    saveBtn.addEventListener('click', () => {
+        document.querySelector('form').submit();
+    })
+}
+
+function colorsEvents() { // Adiciona os event listeners nas cores
+    const colors = document.querySelectorAll('.color');
+
+    colors.forEach(color => {
+        color.addEventListener('click', () => {
+            selectColor(color);
+        })
+    })
+}
+
+
 // =================================================
 // 3️⃣ FUNÇÃO QUE RODA QUANDO A PÁGINA É CARREGADA
 // =================================================
@@ -146,4 +381,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     socialEvents(); // Configura o event listener de rede social
     clickEvents();
+    editEvent();
+    closeEvent();
+    removeLinkEvent();
+    addLinkEvent();
+    emojiPickerEvent();
+    verifyInputsEvent();
+    submitEvent();
+    colorsEvents();
+    updateColor();
 })

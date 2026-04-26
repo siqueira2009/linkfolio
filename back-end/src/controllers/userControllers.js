@@ -33,8 +33,20 @@ function updateClicks(req, res, at) {
     res.json({"mensagem": "Cliques atualizados"});
 }
 
-function postUser(req, res, name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links) {
-    const id = services.postUser(name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links);
+async function updateUser(req, res, at, bodyData) {
+    const id = await services.updateUser(at, bodyData);
+
+    if (id == null || id == undefined) {
+        res.status(200).json({"mensagem": "Usuário atualizado com sucesso!"});
+        return;
+    } else {
+        res.status(500).json({"mensagem": "Erro ao atualizar usuário!"});
+        return;
+    }
+}
+
+function postUser(req, res, bodyData) {
+    const id = services.postUser(bodyData);
 
     if (id == null || id == undefined) {
         res.status(500).json({"erro": "Não foi possível criar usuário"});
@@ -44,7 +56,7 @@ function postUser(req, res, name, pronouns, at, bio, color, instagram, linkedin,
         return;
     }
 
-    res.json({"mensagem": `Usuário @${at} criado com sucesso`})
+    res.json({"mensagem": `Usuário @${bodyData.at} criado com sucesso`})
 }
 
 function deleteUser(req, res, at) {
@@ -63,5 +75,6 @@ export {
     postUser,
     deleteUser,
     updateViews,
-    updateClicks
+    updateClicks,
+    updateUser
 }

@@ -8,9 +8,11 @@ router.get('/', (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, customLinks } = req.body;
+    const bodyData = req.body;
+    
+    console.log(bodyData);
 
-    controllers.createProfile(req, res, name, bio, color, pronouns, at, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, customLinks);
+    controllers.createProfile(req, res, bodyData);
 })
 
 export default router;

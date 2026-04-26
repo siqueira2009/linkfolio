@@ -246,6 +246,11 @@ function openModal() { // Função que abre o modal de adicionar link personaliz
 
     const dialog = document.querySelector('dialog');
     dialog.setAttribute('open', 'true');
+    dialog.style.marginTop = '1000px';
+    
+    setTimeout(() => {
+        dialog.style.marginTop = '0px'
+    }, 200)
 }
 
 function showEmptyLinksMessage() { // Função que verifica se é necessário mostrar que não há links personzalizados ainda

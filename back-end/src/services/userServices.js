@@ -64,16 +64,35 @@ function updateClicks(at) {
     return nedeedUser;
 }
 
-function postUser(name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, links) {
+function updateUser(at, bodyData) {
+    const neededUserIndex = users.findIndex(u => u.at == at);
+    const userId = users.find(u => u.at == at).id;
+    const userPassword = users.find(u => u.at == at).password;
+
+    users.splice(neededUserIndex, 1);
+
+    const userDetails = new UserModel(userId, bodyData.name, bodyData.pronouns, at, bodyData.bio, userPassword, bodyData.color);
+    const userSocials = new SocialsModel(bodyData.instagram, bodyData.linkedin, bodyData.x, bodyData.github, bodyData.youtube, bodyData.discord, bodyData.steam, bodyData.facebook, bodyData.tiktok);
+    const userLinks = Array.isArray(bodyData.links) ? bodyData.links : [];
+    const newUser = {...userDetails, ...userSocials};
+
+    newUser.links = userLinks;
+
+    users.splice(neededUserIndex, 0, newUser);
+    updateJSON();
+    return newUser.id;
+}
+
+function postUser(bodyData) {
     const allAts = users.map(getAt);
 
-    if (allAts.includes(at)) {
+    if (allAts.includes(bodyData.at)) {
         return "duplicated"
     }
 
-    const userDetails = new UserModel(idCounter, name, pronouns, at, bio, color);
-    const userSocials = new SocialsModel(instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok);
-    const userLinks = Array.isArray(links) ? links : [];
+    const userDetails = new UserModel(idCounter, bodyData.name, bodyData.pronouns, bodyData.at, bodyData.bio, bodyData.password, bodyData.color);
+    const userSocials = new SocialsModel(bodyData.instagram, bodyData.linkedin, bodyData.x, bodyData.github, bodyData.youtube, bodyData.discord, bodyData.steam, bodyData.facebook, bodyData.tiktok);
+    const userLinks = Array.isArray(bodyData.links) ? bodyData.links : [];
     const newUser = {...userDetails, ...userSocials};
 
     newUser.links = userLinks;
@@ -87,6 +106,7 @@ function postUser(name, pronouns, at, bio, color, instagram, linkedin, x, github
 function deleteUser(at) {
     const index = users.findIndex(u => u.at == at);
 
+    idCounter--;
     users.splice(index, 1);
     updateJSON();
 
@@ -98,5 +118,6 @@ export {
     postUser,
     deleteUser,
     updateViews,
-    updateClicks
+    updateClicks,
+    updateUser
 }

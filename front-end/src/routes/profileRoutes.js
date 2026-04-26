@@ -13,7 +13,13 @@ router.get('/:at', async (req, res) => {
     } else {
         res.render('pages/user.ejs', {user})
     }
-
 });
+
+router.post('/:at', (req, res) => {
+    const at = req.params.at;
+    const bodyData = req.body;
+
+    controllers.updateUser(req, res, at, bodyData);
+})
 
 export default router;

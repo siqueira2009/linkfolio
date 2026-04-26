@@ -1,8 +1,9 @@
 class UserModel {
-    constructor(id, name, pronouns, at, bio, color) {
+    constructor(id, name, pronouns, at, bio, password, color) {
         this.id = id,
         this.name = name,
         this.pronouns = pronouns,
+        this.password = password,
         this.at = at,
         this.bio = bio
         this.color = color,

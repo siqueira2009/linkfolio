@@ -92,6 +92,176 @@
                 <h2 class="noLinkSocial">Nenhum link personalizado adicionado!</h2>
             <% } %>
         </section>
+
+        <!-- Botão de editar -->
+        <i class="bgModifiedHover" id="editProfile" data-lucide="sliders-horizontal"></i>
+
+        <dialog open="true">
+            <h1>Editar perfil</h1>
+                    
+            <form method="POST">
+                <div class="inputGroup" style="margin: 0; margin-top: 16px;">
+                    <input class="required" name="name" type="text" required="" value="<%= user.name %>" autocomplete="off">
+                    <label for="name">Seu nome<span class="required">*</span></label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="user"></i>
+                    </div>
+                </div>
+
+                <div class="inputGroup">
+                    <input class="required" name="pronouns" type="text" required="" value="<%= user.pronouns %>" autocomplete="off">
+                    <label for="pronouns">Seus pronomes<span class="required">*</span></label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="hat-glasses"></i>
+                    </div>
+                </div>
+
+                <div class="inputGroup" style="margin: 0; margin-top: 16px;">
+                    <input class="required" name="bio" type="text" required="" value="<%= user.bio %>" autocomplete="off">
+                    <label for="bio">Sua descrição<span class="required">*</span></label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="pen"></i>
+                    </div>
+                </div>
+    
+                <div id="colors">
+                    <div class="color selected" id="red"></div>
+                    <div class="color" id="green"></div>
+                    <div class="color" id="blue"></div>
+                    <div class="color" id="white"></div>
+                    <div class="color" id="orange"></div>
+                    <div class="color" id="yellow"></div>
+                </div>
+
+                <p class="topic"><span class="colorModified">Redes</span> sociais</p>
+                <div id="editSocials">
+                    <div class="inputGroup inputSocial requireDeletion" id="social0">
+                        <input name="instagram" type="text" value="<%= user.Instagram %>" autocomplete="off">
+                        <label for="instagram">Instagram</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social1">
+                        <input name="linkedin" type="text" value="<%= user.LinkedIn %>" autocomplete="off">
+                        <label for="linkedin">LinkedIn</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-square-linkedin"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social2">
+                        <input name="x" type="text" value="<%= user['X/Twitter'] %>" autocomplete="off">
+                        <label for="x">X/Twitter</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-x-twitter"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social3">
+                        <input name="github" type="text" value="<%= user.GitHub %>" autocomplete="off">
+                        <label for="github">GitHub</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-github"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social4">
+                        <input name="youtube" type="text" value="<%= user.YouTube %>" autocomplete="off">
+                        <label for="youtube">YouTube</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social5">
+                        <input name="discord" type="text" value="<%= user.Discord %>" autocomplete="off">
+                        <label for="discord">Discord</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-discord"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social6">
+                        <input name="steam" type="text" value="<%= user.Steam %>" autocomplete="off">
+                        <label for="steam">Steam</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-steam"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social7">
+                        <input name="facebook" type="text"value="<%= user.Facebook %>" autocomplete="off">
+                        <label for="facebook">Facebook</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-facebook"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social8">
+                        <input name="tiktok" type="text" value="<%= user.TikTok %>" autocomplete="off">
+                        <label for="tiktok">TikTok</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-tiktok"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="topic" style="margin-top: 16px;"><span class="colorModified">Links</span> atuais</p>
+                <div id="editLinks">
+                    <% for (let i = 0; i < user.links.length; i++) { %>
+                        <a class="link editLink">
+                            <div class="linkIcon bgModified"><%= user.links[i].emoji %></div>
+                            <div class="linkText">
+                                <h2 class="title"><%= user.links[i].name %></h2>
+                                <p class="subtitle"><%= user.links[i].bio %></p>
+                            </div>
+                            <i class="removeLink" data-lucide="x"></i>
+                        </a>
+                    <% } %>
+                </div>
+
+                <p class="topic" style="margin-top: 16px;"><span class="colorModified">Adicionar</span> Links</p>
+                <div id="addLinks">
+                    <div class="inputGroup">
+                        <input class="required" type="text" required="" value="" id="linkName" autocomplete="off">
+                        <label>Nome do link</label>
+                        <div class="icon">
+                            <i class="iconContent" data-lucide="id-card-lanyard"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="inputGroup">
+                        <input class="required" type="text" required="" value="" id="linkUrl" autocomplete="off">
+                        <label>URL do link</label>
+                        <div class="icon">
+                            <i class="iconContent" data-lucide="link"></i>
+                        </div>
+                    </div>
+
+                    <div class="inputGroup">
+                        <input class="required" type="text" required="" value="" id="linkBio" autocomplete="off">
+                        <label>Breve descrição</label>
+                        <div class="icon">
+                            <i class="iconContent" data-lucide="pencil"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="inputGroup">
+                        <input type="text" required="" id="linkEmoji" disabled placeholder="Escolha um emoji abaixo..." autocomplete="off">
+                        <label>Emoji escolhido</label>
+                        <div class="icon">
+                            <i class="iconContent" data-lucide="chess-knight"></i>
+                        </div>
+                    </div>
+
+                    <emoji-picker locale="pt_BR"></emoji-picker>
+
+                    <button type="button" id="addLink" disabled="true">Adicionar link</button>
+                </div>
+
+                <input name="color" type="text" id="colorInput" required="" value="<%= user.color %>" style="display: none;"></input>
+                <input style="display: none" type="text" name="customLinks" id="customLinksInput" value="<%= JSON.stringify(user.links) %>">
+            </form>
+            
+            <div class="buttonsContainer" id="linkButtons">
+                <button type="button" id="cancelEdit">Cancelar</button>
+                <button type="submit" id="saveEdit">Salvar</button>
+            </div>
+        </dialog>
     </main>
 
     <!-- Importação de scripts -->
@@ -99,5 +269,6 @@
 
     <!-- Importação das bibliotecas -->
     <script src="https://unpkg.com/lucide@latest"></script>  <!-- Ícones Lucide -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script> <!-- Seletor de emojis -->
 </body>
 </html>

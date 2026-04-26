@@ -14,9 +14,19 @@ async function getUser(req, res, at) {
     
         return response;
     }
+}
 
+async function updateUser(req, res, at, bodyData) {
+    try {
+        const response = await services.updateUser(at, bodyData);
+    
+        res.redirect(`/u/${at}`);
+    } catch (error) {
+        res.status(500).json({"mensagem": "Erro ao atualizar perfil!", "erro": error});
+    }
 }
 
 export {
-    getUser
+    getUser,
+    updateUser
 }

@@ -1,21 +1,22 @@
-async function createProfile(name, pronouns, at, bio, color, instagram, linkedin, x, github, youtube, discord, steam, facebook, tiktok, customLinks) {
-    const parsedLinks = customLinks ? JSON.parse(customLinks) : []; 
+async function createProfile(bodyData) {
+    const parsedLinks = bodyData.customLinks ? JSON.stringify(bodyData.customLinks) : []; 
     
     const data = {
-        name: name,
-        pronouns: pronouns,
-        at: at,
-        bio: bio,
-        color: color,
-        instagram: instagram,
-        linkedin: linkedin,
-        x: x,
-        github: github,
-        youtube: youtube,
-        discord: discord,
-        steam: steam,
-        facebook: facebook,
-        tiktok: tiktok,
+        name: bodyData.name,
+        pronouns: bodyData.pronouns,
+        at: bodyData.at,
+        bio: bodyData.bio,
+        password: bodyData.password,
+        color: bodyData.color,
+        instagram: bodyData.instagram,
+        linkedin: bodyData.linkedin,
+        x: bodyData.x,
+        github: bodyData.github,
+        youtube: bodyData.youtube,
+        discord: bodyData.discord,
+        steam: bodyData.steam,
+        facebook: bodyData.facebook,
+        tiktok: bodyData.tiktok,
         links: parsedLinks
     }
     
