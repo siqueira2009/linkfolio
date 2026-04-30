@@ -1,5 +1,5 @@
 {
-  "name": "linkfolio-full",
+  "name": "linkfolio-frontend",
   "version": "1.0.0",
   "description": "",
   "repository": {
@@ -11,12 +11,12 @@
   "type": "module",
   "main": "app.js",
   "scripts": {
-    "dev": "cls && concurrently \"cd back-end && node --watch app.js\" \"cd front-end && node --watch app.js\""
+    "dev": "cls && node --watch app.js"
   },
   "dependencies": {
+    "bcrypt": "^6.0.0",
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
     "express": "^5.2.1"
-  },
-  "devDependencies": {
-    "concurrently": "^9.2.1"
   }
 }

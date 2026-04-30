@@ -1,0 +1,154 @@
+/* Telas entre 0px e 350px de largura */
+@media screen and (max-width: 350px) {
+    /* MAIN */
+    main {
+        display: none;
+    }
+    
+    /* INDISPONÍVEL */
+    #unavailabe {
+        display: flex;
+    }
+}
+
+/* Telas entre 350px e 450px de largura */
+@media screen and (min-width: 350px) and (max-width: 450px) {
+    /* CONFIGURAÇÕES GLOBAIS */
+    body {
+        padding: 15px;
+    }
+
+    /* MAIN */
+    main {
+        width: 100%;
+        gap: 10px;
+    }
+
+    /* FORMULÁRIO */
+    form #formTitle {
+        color: white;
+        font-size: 35px;
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .inputGroup input {
+        width: 100%;
+        font-size: 95%;
+        padding: 12.8px;
+        outline: none;
+        border: 2px rgba(255,255,255,0.08) solid;
+        background-color: transparent;
+        border-radius: 20px;
+
+        color: white;
+
+        transition: border 0.3s ;
+    }
+
+    .inputGroup input::placeholder {
+        font-size: 14px !important;
+    }
+
+    /* ETAPA 1 */
+    #colors .color {
+        aspect-ratio: 1/1;
+        height: 45px;
+        border-radius: 100px;
+        border: 2px solid white;
+        cursor: pointer;
+        
+        transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    #colors .color:hover, #colors .color.selected {
+        scale: 120%;
+    }
+
+    /* ETAPA 3 */
+    #nenhumLink {
+        text-align: center;
+        color: white;
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    #nenhumLinkSub {
+        text-align: center;
+        color: white;
+        font-weight: 400;
+        font-size: 16px;
+    }
+
+    /* MODAL */
+    dialog h1 {
+        font-size: 28px;
+    }
+
+    emoji-picker {
+        margin-top: 16px;
+
+        width: 100%;
+        --background: transparent;
+        --border-color: #1d1d21;
+        --border-size: 2px;
+        --border-radius: 12px;
+
+        --input-border-color: #1d1d21; 
+        --input-border-radius: 8px;
+        --input-border-size: 2px;
+        --outline-color: #1d1d21;
+    }
+}
+
+/* Telas entre 450px e 550px de largura */
+@media screen and (min-width: 450px) and (max-width: 550px) {
+    /* CONFIGURAÇÕES GLOBAIS */
+    body {
+        padding: 15px;
+    }
+
+    /* MAIN */
+    main {
+        width: 100%;
+        gap: 10px;
+    }
+
+    /* ETAPA 2 */
+    #colors {
+        padding: 0px 3px;
+    }
+}
+
+/* Telas entre 550px e 700px de largura */
+@media screen and (min-width: 550px) and (max-width: 700px) {
+    /* MAIN */
+    main {
+        width: 90%;
+    }
+
+}
+
+/* Telas entre 700px e 1000px de largura */
+@media screen and (min-width: 700px) and (max-width: 1000px) {
+    /* MAIN */
+    main {
+        width: 70%;
+    }
+}
+
+/* Telas entre 1000px e 1300px de largura */
+@media screen and (min-width: 1000px) and (max-width: 1300px) {
+    /* MAIN */
+    main {
+        width: 50%;
+    }
+}
+
+/* Telas entre 1300px e 1400px de largura */
+@media screen and (min-width: 1300px) and (max-width: 1400px) {
+    /* MAIN */
+    main {
+        width: 40%;
+    }
+}

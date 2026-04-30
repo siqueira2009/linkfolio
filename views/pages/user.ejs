@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkFolio | @<%=user.at%></title>
+    <link rel="stylesheet" href="../css/user/user.css">
+    <link rel="stylesheet" href="../css/user/user_responsive.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="../assets/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <!-- MENSAGEM PARA QUANDO A TELA É MUITO PEQUENA -->
+    <div id="unavailabe">
+        <h1>Site indisponível!<h1>
+        <h3>🤏 Sua tela é muito pequena<h3>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL DA PÁGINA -->
+    <main id="color-<%=user.color%>">
+        <!-- Seção do perfil (foto, nome, arroba e sobre) -->
+        <section id="profile">
+            <h1 class="userIcon bgModified"><%= user.firstLetters %></h1>
+            <h1 class="userName"><%= user.name %></h1>
+            <p class="userAt colorModified">@<%= user.at %></p>
+            <span class="userPronouns">(<%= user.pronouns %>)</span>
+            <h3 class="userBio"><%= user.bio %></h3>
+        </section>
+
+        <!-- Seção das estatísticas (cliques, links e CTR) -->
+        <section id="userStats">
+            <article class="card">
+                <h1 id="views" class="colorModified"><%= user.views %></h1>
+                <p>visualizações</p>
+            </article>
+
+            <article class="card">
+                <h1 id="clicks"  class="colorModified"><%= user.clicks %></h1>
+                <p>cliques</p>
+            </article>
+
+            <article class="card">
+                <% if (user.views == 0 && user.clicks == 0) { %>
+                    <h1 class="colorModified">0%</h1>
+                <% } else { %>
+                    <h1 id="ctr" class="colorModified"><%=Math.min((user.clicks / user.views) * 100, 100).toFixed(0)%>%</h1>
+                <% } %>
+                <p>CTR</p>
+            </article>
+        </section>
+
+        <!-- Seção das redes sociais -->
+        <section id="userSocials">
+            <p class="topic"><span class="colorModified">Redes</span> sociais</p>
+            <div id="socialsContainer">
+                <% const socials = ["Instagram", "LinkedIn", "X/Twitter", "GitHub", "YouTube", "Discord", "Steam", "Facebook", "TikTok"]%>
+                <% const socialLogos = ["fa-instagram", "fa-square-linkedin", "fa-x-twitter", "fa-github", "fa-youtube", "fa-discord", "fa-steam", "fa-facebook", "fa-tiktok"] %>
+                <% const socialUrls = ["https://www.instagram.com/", "https://www.linkedin.com/in/", "https://x.com/", "https://github.com/", "https://www.youtube.com/@", "https://discord.com/users/", "https://steamcommunity.com/id/", "https://www.facebook.com/", "https://www.tiktok.com/@"]; %>
+                <% let totalSocials = socials.length %>
+                <% for (let i = 0; i < 9; i++) { %>
+                    <% if (user[socials[i]] != "") { %>
+                        <a class="socialMedia" href="<%= socialUrls[i] %><%= user[socials[i]]%>" target="_blank" rel="noopener noreferrer">
+                            <i class="fa-brands <%= socialLogos[i] %>"></i>
+                            <p><%= socials[i]%></p>
+                        </a>
+                        <% totalSocials-- %>
+                    <% } %>
+                <% } %>                
+            </div>
+            <% if (totalSocials == socials.length) { %>
+                <h2 class="noLinkSocial">Nenhuma rede social adicionada!</h2>
+            <% } %>
+        </section>
+        
+        <!-- Seção de links personalizados do usuário -->
+        <section id="userLinks">
+            <p class="topic"><span class="colorModified">Links</span> em destaque</p>
+            <div id="linksContainer">
+                <% let totalLinks = user.links.length %>
+                <% for (let i = 0; i < user.links.length; i++) {%>
+                <a class="link" href="http://<%= user.links[i].url %>" target="_blank" rel="noopener noreferrer">
+                    <div class="linkIcon bgModified"><%= user.links[i].emoji %></div>
+                    <div class="linkText">
+                        <h2 class="title"><%= user.links[i].name %></h2>
+                        <p class="subtitle"><%= user.links[i].bio %></p>
+                    </div>
+                    <i data-lucide="chevron-right"></i>
+                </a>
+                <% totalLinks-- %>
+                <% } %>
+            </div>
+            <% if (totalLinks == user.links.length) { %>
+                <h2 class="noLinkSocial">Nenhum link personalizado adicionado!</h2>
+            <% } %>
+        </section>
+
+        <!-- Botão de editar -->
+        <i class="bgModifiedHover" id="editProfile" data-lucide="sliders-horizontal"></i>
+
+        <!-- MODAL COM OPÇÕES DE EDIÇÃO -->
+        <dialog open="false">
+            <h1>Editar perfil</h1>
+                    
+            <form method="POST">
+                <!-- INFORMAÇÕES PESSOAIS -->
+                <div class="inputGroup" style="margin: 0; margin-top: 16px;">
+                    <input class="required" name="name" type="text" required="" value="<%= user.name %>" autocomplete="off">
+                    <label for="name">Seu nome<span class="required">*</span></label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="user"></i>
+                    </div>
+                </div>
+
+                <div class="inputGroup">
+                    <input class="required" name="pronouns" type="text" required="" value="<%= user.pronouns %>" autocomplete="off">
+                    <label for="pronouns">Seus pronomes<span class="required">*</span></label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="hat-glasses"></i>
+                    </div>
+                </div>
+
+                <div class="inputGroup" style="margin: 0; margin-top: 16px;">
+                    <input class="required" name="bio" type="text" required="" value="<%= user.bio %>" autocomplete="off">
+                    <label for="bio">Sua descrição<span class="required">*</span></label>
+                    <div class="icon">
+                        <i class="iconContent" data-lucide="pen"></i>
+                    </div>
+                </div>
+    
+                <!-- COR -->
+                <div id="colors">
+                    <div class="color selected" id="red"></div>
+                    <div class="color" id="green"></div>
+                    <div class="color" id="blue"></div>
+                    <div class="color" id="white"></div>
+                    <div class="color" id="orange"></div>
+                    <div class="color" id="yellow"></div>
+                </div>
+
+                <!-- REDES SOCIAIS -->
+                <p class="topic"><span class="colorModified">Redes</span> sociais</p>
+                <div id="editSocials">
+                    <div class="inputGroup inputSocial requireDeletion" id="social0">
+                        <input name="instagram" type="text" value="<%= user.Instagram %>" autocomplete="off">
+                        <label for="instagram">Instagram</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-instagram"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social1">
+                        <input name="linkedin" type="text" value="<%= user.LinkedIn %>" autocomplete="off">
+                        <label for="linkedin">LinkedIn</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-square-linkedin"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social2">
+                        <input name="x" type="text" value="<%= user['X/Twitter'] %>" autocomplete="off">
+                        <label for="x">X/Twitter</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-x-twitter"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social3">
+                        <input name="github" type="text" value="<%= user.GitHub %>" autocomplete="off">
+                        <label for="github">GitHub</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-github"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social4">
+                        <input name="youtube" type="text" value="<%= user.YouTube %>" autocomplete="off">
+                        <label for="youtube">YouTube</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-youtube"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social5">
+                        <input name="discord" type="text" value="<%= user.Discord %>" autocomplete="off">
+                        <label for="discord">Discord</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-discord"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social6">
+                        <input name="steam" type="text" value="<%= user.Steam %>" autocomplete="off">
+                        <label for="steam">Steam</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-steam"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social7">
+                        <input name="facebook" type="text"value="<%= user.Facebook %>" autocomplete="off">
+                        <label for="facebook">Facebook</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-facebook"></i>
+                        </div>
+                    </div>
+                    <div class="inputGroup inputSocial requireDeletion" id="social8">
+                        <input name="tiktok" type="text" value="<%= user.TikTok %>" autocomplete="off">
+                        <label for="tiktok">TikTok</label>
+                        <div class="icon">
+                            <i class="iconContent fa-brands fa-tiktok"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LINKS PERSONALIZADOS -->
+                <p class="topic" style="margin-top: 16px;"><span class="colorModified">Links</span> atuais</p>
+                <div id="editLinks">
+                    <% for (let i = 0; i < user.links.length; i++) { %>
+                        <a class="link editLink">
+                            <div class="linkIcon bgModified"><%= user.links[i].emoji %></div>
+                            <div class="linkText">
+                                <h2 class="title"><%= user.links[i].name %></h2>
+                                <p class="subtitle"><%= user.links[i].bio %></p>
+                            </div>
+                            <i class="removeLink" data-lucide="x"></i>
+                        </a>
+                    <% } %>
+                </div>
+
+                <!-- ADICIONAR LINKS -->
+                <p class="topic" style="margin-top: 16px;"><span class="colorModified">Adicionar</span> Links</p>
+                <div id="addLinks">
+                    <div class="inputGroup">
+                        <input class="required" type="text" required="" value="" id="linkName" autocomplete="off">
+                        <label>Nome do link</label>
+                        <div class="icon">
+                            <i class="iconContent" data-lucide="id-card-lanyard"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="inputGroup">
+                        <input class="required" type="text" required="" value="" id="linkUrl" autocomplete="off">
+                        <label>URL do link</label>
+                        <div class="icon">
+                            <i class="iconContent" data-lucide="link"></i>
+                        </div>
+                    </div>
+
+                    <div class="inputGroup">
+                        <input class="required" type="text" required="" value="" id="linkBio" autocomplete="off">
+                        <label>Breve descrição</label>
+                        <div class="icon">
+                            <i class="iconContent" data-lucide="pencil"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="inputGroup">
+                        <input type="text" required="" id="linkEmoji" disabled placeholder="Escolha um emoji abaixo..." autocomplete="off">
+                        <label>Emoji escolhido</label>
+                        <div class="icon">
+                            <i class="iconContent" data-lucide="chess-knight"></i>
+                        </div>
+                    </div>
+
+                    <emoji-picker locale="pt_BR"></emoji-picker>
+
+                    <button type="button" id="addLink" disabled="true">Adicionar link</button>
+                </div>
+
+                <!-- INPUTS ESCONDIDOS (GUARDAM COR E LINKS) -->
+                <input name="color" type="text" id="colorInput" required="" value="<%= user.color %>" style="display: none;"></input>
+                <input style="display: none" type="text" name="customLinks" id="customLinksInput" value="<%= JSON.stringify(user.links) %>">
+            </form>
+            
+            <!-- BOTÕES DE CANCELAR E SALVAR -->
+            <div class="buttonsContainer" id="linkButtons">
+                <button type="button" id="cancelEdit">Cancelar</button>
+                <button type="button" id="saveEdit">Salvar</button>
+            </div>
+        </dialog>
+    </main>
+
+    <!-- Importação de scripts -->
+    <script src="../js/user.js"></script>
+
+    <!-- Importação das bibliotecas -->
+    <script src="https://unpkg.com/lucide@latest"></script>  <!-- Ícones Lucide -->
+    <script type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js"></script> <!-- Seletor de emojis -->
+</body>
+</html>
