@@ -12,7 +12,7 @@ services:
       - user-data:/linkfolio-backend/src/data
     environment:
       - JWT_SECRET=${JWT_SECRET}
-      - FRONTEND_URL=http://localhost:3001
+      - FRONTEND_URL=${FRONTEND_URL}
   
   frontend:
     image: siqueira2009/linkfolio-frontend:v1.0
@@ -23,6 +23,7 @@ services:
       - linkfolio
     environment:
       - BACKEND_URL=http://backend:3000
+      - BACKEND_URL_PUBLIC=${BACKEND_URL_PUBLIC}
     depends_on:
       - backend
 
