@@ -1,0 +1,464 @@
+/* Telas entre 0px e 350px de largura */
+@media screen and (max-width: 350px) {
+    /* MAIN */
+    main {
+        display: none;
+    }
+
+    /* INDISPONÍVEL */
+    #unavailabe {
+        display: flex;
+    }
+}
+
+/* Telas entre 350px e 450px de largura */
+@media screen and (min-width: 350px) and (max-width: 450px) {
+    /* CONFIGURAÇÕES GLOBAIS */
+    body {
+        padding: 15px;
+    }
+
+    /* MAIN */
+    main {
+        width: 100%;
+        gap: 10px;
+    }
+
+    /* PERFIL */
+    #profile .userIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        aspect-ratio: 1/1;
+        width: 90px;
+
+        margin-bottom: 10px;
+        font-size: 45px;
+        border-radius: 100px;
+        border: 6px currentColor solid;
+        font-weight: 600;
+    }
+
+    #profile .userName {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    #profile .userAt {
+        font-size: 16.5px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    #profile .userBio {
+        font-size: 16px;
+    }
+
+    /* ESTATÍSTICAS */
+    #userStats {
+        width: 100%;
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-around;
+        gap: 5px;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+
+        padding: 10px;
+        
+        border-radius: 12px;
+        border: 1.5px rgba(255,255,255,0.08) solid;
+        background-color: #1c1c28;
+    }
+
+    #userStats .card > h1 {
+        font-weight: 700;
+        font-size: 24px;
+    }
+
+    #userStats .card > p {
+        font-size: 14px;
+    }
+
+    /* REDES SOCIAIS */
+    #userSocials .socialMedia i {
+        font-size: 20px;
+    }
+
+    #userSocials .socialMedia p {
+        font-size: 14px
+    }
+
+    /* LINKS PERSONALIZADOS */
+    #userLinks {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #userLinks > p {
+        align-self: start;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    #userLinks #linksContainer {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #userLinks .link {
+        width: 100%;
+        gap: 20px;
+        text-decoration: none;
+        border-radius: 12px;
+        border: 1.5px rgba(255,255,255,0.08) solid;
+        background-color: #1c1c28;
+        padding: 10px;
+    }
+
+    #userLinks .linkIcon {
+        font-size: 25px;
+        padding: 5px;
+        border-radius: 12px;
+        background-color: rgba(200,255,87,0.15);
+    }
+
+    #userLinks .linkText {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    #userLinks .linkText .title {
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    #userLinks .linkText .subtitle {
+        font-size: 12px;
+    }
+
+    /* EDITAR PERFIL */
+    dialog[open="true"] {
+        width: 95%;
+    }
+
+    #editSocials {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #editLinks {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        width: 100%;
+    }
+
+    dialog .link {
+        margin-top: 0px;
+    }
+
+    #editLinks > p {
+        align-self: start;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    #editLinks #linksContainer {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #editLinks .link {
+        width: 100%;
+        gap: 20px;
+        text-decoration: none;
+        border-radius: 12px;
+        border: 1.5px rgba(255,255,255,0.08) solid;
+        background-color: #1c1c28;
+        padding: 10px;
+    }
+
+    #editLinks .linkIcon {
+        font-size: 25px;
+        padding: 5px;
+        border-radius: 12px;
+        background-color: rgba(200,255,87,0.15);
+    }
+
+    #editLinks .linkText {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    #editLinks .linkText .title {
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    #editLinks .linkText .subtitle {
+        font-size: 12px;
+    }
+
+    #colors {
+        display: grid;
+        place-items: center;
+        gap: 15px;
+        grid-template-columns: repeat(3, 2fr);
+        margin: 20px auto;
+    }
+
+    #colors .color.selected, #colors .color:hover {
+        scale: 120%;
+    }
+}
+
+/* Telas entre 450PX e 600px de largura */
+@media screen and (min-width: 450px) and (max-width: 600px) {
+    /* BODY */
+    body {
+        padding: 15px;
+    }
+
+    /* MAIN */
+    main {
+        width: 100%;
+        gap: 10px;
+    }
+
+    /* PERFIL */
+    #profile .userIcon {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        aspect-ratio: 1/1;
+        width: 90px;
+
+        margin-bottom: 10px;
+        font-size: 45px;
+        border-radius: 100px;
+        border: 6px currentColor solid;
+        font-weight: 600;
+    }
+
+    #profile .userName {
+        font-size: 30px;
+        font-weight: 600;
+    }
+
+    #profile .userAt {
+        font-size: 16.5px;
+        font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    #profile .userBio {
+        font-size: 16px;
+    }
+
+    /* ESTATÍSTICA */
+    #userStats {
+        width: 100%;
+        margin-top: 20px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: space-around;
+        gap: 5px;
+    }
+
+    .card {
+        display: flex;
+        flex-direction: column;
+
+        padding: 10px;
+        
+        border-radius: 12px;
+        border: 1.5px rgba(255,255,255,0.08) solid;
+        background-color: #1c1c28;
+    }
+
+    #userStats .card > h1 {
+        font-weight: 700;
+        font-size: 24px;
+    }
+
+    #userStats .card > p {
+        font-size: 14px;
+    }
+
+    /* LINKS PERSONALIZADOS */
+    #userLinks {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+
+        width: 100%;
+        margin-top: 20px;
+    }
+
+    #userLinks > p {
+        align-self: start;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    #userLinks #linksContainer {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #userLinks .link {
+        width: 100%;
+        gap: 20px;
+        text-decoration: none;
+        border-radius: 12px;
+        border: 1.5px rgba(255,255,255,0.08) solid;
+        background-color: #1c1c28;
+        padding: 10px;
+    }
+
+    #userLinks .linkIcon {
+        font-size: 25px;
+        padding: 5px;
+        border-radius: 12px;
+        background-color: rgba(200,255,87,0.15);
+    }
+
+    #userLinks .linkText {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    #userLinks .linkText .title {
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    #userLinks .linkText .subTitle {
+        font-size: 12px;
+    }
+
+    /* EDITAR PERFIL */
+    dialog[open="true"] {
+        width: 95%;
+    }
+
+    #editSocials {
+        grid-template-columns: repeat(1, 1fr);
+    }
+
+    #editLinks {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+
+        width: 100%;
+    }
+
+    dialog .link {
+        margin-top: 0px;
+    }
+
+    #editLinks > p {
+        align-self: start;
+        font-size: 20px;
+        font-weight: 500;
+    }
+
+    #editLinks #linksContainer {
+        width: 100%;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    #editLinks .link {
+        width: 100%;
+        gap: 20px;
+        text-decoration: none;
+        border-radius: 12px;
+        border: 1.5px rgba(255,255,255,0.08) solid;
+        background-color: #1c1c28;
+        padding: 10px;
+    }
+
+    #editLinks .linkIcon {
+        font-size: 25px;
+        padding: 5px;
+        border-radius: 12px;
+        background-color: rgba(200,255,87,0.15);
+    }
+
+    #editLinks .linkText {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+    }
+
+    #editLinks .linkText .title {
+        font-weight: 700;
+        font-size: 18px;
+    }
+
+    #editLinks .linkText .subtitle {
+        font-size: 12px;
+    }
+
+    #colors {
+        display: grid;
+        place-items: center;
+        gap: 15px;
+        grid-template-columns: repeat(3, 2fr);
+        margin: 20px auto;
+    }
+
+    #colors .color.selected, #colors .color:hover {
+        scale: 120%;
+    }
+}
+
+/* Telas entre 600px e 900px de largura */
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    /* BODY */
+    body {
+        padding: 15px;
+    }
+
+    /* MAIN */
+    main {
+        width: 100%;
+    }
+
+    /* EDITAR PERFIL */
+    dialog[open="true"] {
+        width: 90%;
+    }
+}
+
+/* Telas entre 900px e 1700px de largura */
+@media screen and (min-width: 900px) and (max-width: 1700px) {
+    /* BODY */
+    body {
+        padding: 15px;
+    }
+
+    /* MAIN */
+    main {
+        width: 50%;
+    }
+}

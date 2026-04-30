@@ -1,0 +1,22 @@
+{
+  "name": "linkfolio-full",
+  "version": "1.0.0",
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/siqueira2009/linkfolio.git"
+  },
+  "license": "ISC",
+  "author": "Lucas de Souza Siqueira",
+  "type": "module",
+  "main": "app.js",
+  "scripts": {
+    "dev": "cls && concurrently \"cd back-end && node --watch app.js\" \"cd front-end && node --watch app.js\""
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}
