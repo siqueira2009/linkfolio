@@ -1,0 +1,34 @@
+name: linkfolio
+
+services:
+  backend:
+    image: siqueira2009/linkfolio-backend:v1.1
+    container_name: backend
+    ports:
+      - "3000:3000"
+    networks:
+      - linkfolio
+    volumes:
+      - user-data:/linkfolio-backend/src/data
+    environment:
+      - JWT_SECRET=${JWT_SECRET}
+      - FRONTEND_URL=http://localhost:3001
+  
+  frontend:
+    image: siqueira2009/linkfolio-frontend:v1.0
+    container_name: frontend
+    ports:
+      - "3001:3001"
+    networks:
+      - linkfolio
+    environment:
+      - BACKEND_URL=http://backend:3000
+    depends_on:
+      - backend
+
+volumes:
+  user-data:
+
+networks:
+  linkfolio:
+    driver: bridge
