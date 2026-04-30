@@ -73,7 +73,7 @@ async function clickUpdater() { // Função que atualiza os cliques - fetch na A
     const at = document.querySelector('.userAt').textContent.replace('@', '');
     
     try {
-        const response = await fetch(`http://localhost:3000/user/${at}/clicks`, {
+        const response = await fetch(`${window.BACKEND_URL}/user/${at}/clicks`, {
             method: "PUT"
         });
 
@@ -94,7 +94,7 @@ async function updateInfo() { // Função que atualiza as informações (Cliques
 
     const at = document.querySelector('.userAt').textContent.replace('@', '');
     try {
-        const response = await fetch(`http://localhost:3000/user/${at}`, {
+        const response = await fetch(`${window.BACKEND_URL}/user/${at}`, {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json'
@@ -218,7 +218,7 @@ async function verifyPassword() { // Função que pede a senha na hora de editar
         return;
     }
 
-    const response = await fetch(`http://localhost:3000/auth/password/${at}`, {
+    const response = await fetch(`${window.BACKEND_URL}/auth/password/${at}`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json'
@@ -292,7 +292,7 @@ async function submitForm(event) { // Função que envia o formulário (via fetc
     };
 
     try { // Tenta fazer uma requisição PUT
-        const response = await fetch(`http://localhost:3000/user/${at}`, {
+        const response = await fetch(`${window.BACKEND_URL}/user/${at}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

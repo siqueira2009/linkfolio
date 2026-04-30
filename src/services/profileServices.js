@@ -1,5 +1,5 @@
 // Pega a URL do backend nas variáveis do sistema
-const BACKEND_URL = process.env.BACKEND_URL;
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3000';
 
 // Função de lógica de coleta de dados do usuário
 async function getUser(at) {

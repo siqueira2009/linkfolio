@@ -8,7 +8,7 @@ import user from './src/routes/profileRoutes.js';
 import createProfile from './src/routes/createRoutes.js'
 
 // Pega a URL do backend nas variáveis do sistema
-const BACKEND_URL = process.env.BACKEND_URL;
+const BACKEND_URL_PULIC = process.env.BACKEND_URL || 'http://localhost:3000';
 
 // Cria o servidor
 const app = express();
@@ -21,7 +21,7 @@ const __dirname = path.dirname(__filename);
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use((req, res, next) => {
-  res.locals.backendUrl = BACKEND_URL;
+  res.locals.backendUrl = BACKEND_URL_PUBLIC;
   next();
 })
 
