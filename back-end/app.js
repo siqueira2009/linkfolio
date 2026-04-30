@@ -10,9 +10,12 @@ import authRouter from './src/routes/authRoutes.js'
 // Cria o app Express
 const app = express();
 
+// Pega a URL do frontend nas variáveis do sistema
+const FRONTEND_URL = process.env.FRONTEND_URL;
+
 // Define algumas coisas
-app.use(cors({ // Permite que 'localhost:3001' acesse a API
-    origin: ['http://localhost:3001', 'http://127.0.0.1:3001'],
+app.use(cors({ // Permite que o front-end acesse a API
+    origin: FRONTEND_URL,
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 app.use(express.json()); // Permite a leitura de bodies JSON
@@ -24,6 +27,6 @@ app.use('/auth', authRouter)
 
 // Faz o servidor ouvir (ficar de pé)
 const PORT = 3000;
-app.listen(PORT, () => {
-    console.log(`✅ Servidor BACK-END iniciado em localhost:${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`✅ Servidor BACK-END iniciado na porta ${PORT}`);
 });

@@ -15,7 +15,7 @@ try { // Tenta ler o arquivo JSON com os valores dos usuários
     users = [];
 }
 
-let idCounter = users.length; // Variável que guarda os IDs
+let idCounter = users.length > 0 ? Math.max(...users.map(u => u.id)) + 1 : 1; // Variável que guarda os IDs
 
 // Função para atualizar o arquivo JSON
 function updateJSON() {

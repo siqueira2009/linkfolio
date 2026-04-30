@@ -1,7 +1,10 @@
+// Pega a URL do backend nas variáveis do sistema
+const BACKEND_URL = process.env.BACKEND_URL;
+
 // Função de lógica de coleta de dados do usuário
 async function getUser(at) {
     try { // Tenta requisitar o back-end para coletar dados do dados
-        const user = await fetch(`http://localhost:3000/user/${at}`, {
+        const user = await fetch(`${BACKEND_URL}/user/${at}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -16,7 +19,7 @@ async function getUser(at) {
         const response = await user.json();
     
         // E depois atualiza a quantidade de visualizações
-        await fetch(`http://localhost:3000/user/${at}/views`, {
+        await fetch(`${BACKEND_URL}/user/${at}/views`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',

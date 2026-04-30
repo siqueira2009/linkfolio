@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import express from 'express';
 import { fileURLToPath } from "url";
 import path from 'path';
@@ -5,6 +6,9 @@ import path from 'path';
 // Importa os Routers
 import user from './src/routes/profileRoutes.js';
 import createProfile from './src/routes/createRoutes.js'
+
+// Pega a URL do backend nas variáveis do sistema
+const BACKEND_URL = process.env.BACKEND_URL;
 
 // Cria o servidor
 const app = express();
@@ -16,6 +20,10 @@ const __dirname = path.dirname(__filename);
 // Middleware para parsear dados do formulário e JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use((req, res, next) => {
+  res.locals.backendUrl = BACKEND_URL;
+  next();
+})
 
 // Pasta views e public
 app.set("view engine", "ejs");

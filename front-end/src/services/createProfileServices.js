@@ -1,3 +1,6 @@
+// Pega a URL do backend nas variáveis do sistema
+const BACKEND_URL = process.env.BACKEND_URL;
+
 // Função de lógica de criação de perfil
 async function createProfile(bodyData) {
     try { // Tenta requisitar o back-end para salvar os dados
@@ -23,7 +26,7 @@ async function createProfile(bodyData) {
         }
         
         // Fetch na rota de salvar dados
-        const response = await fetch('http://localhost:3000/user', {
+        const response = await fetch(`${BACKEND_URL}/user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
