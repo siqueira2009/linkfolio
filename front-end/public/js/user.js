@@ -153,7 +153,6 @@ function addLink(name, url, emoji, bio) { // Função que adiciona links na part
         "bio": bio
     }
 
-
     const linksParent = document.getElementById('editLinks');
     const newLinkElement = document.createElement('a');
     newLinkElement.classList.add('link')
@@ -172,7 +171,7 @@ function addLink(name, url, emoji, bio) { // Função que adiciona links na part
 
     customLinksArray.push(newLink);
     const customLinksInput = document.getElementById('customLinksInput');
-    customLinksInput.value = JSON.stringify(customLinksArray)
+    customLinksInput.value = JSON.stringify(customLinksArray);
 }
 
 function verifyFieldsLinks() { // Função que verifica os inputs de links
@@ -230,6 +229,7 @@ async function verifyPassword() { // Função que pede a senha na hora de editar
     const result = await response.json();
 
     if (result.resultado) {
+        sessionStorage.setItem('editToken', result.token)
         openModal();
     } else {
         alert("Senha incorreta")
@@ -254,6 +254,66 @@ function updateColor() { // Função que atualiza a cor no modal de edição
     const currentColor = colorInput.value;
     const color = document.getElementById(currentColor)
     selectColor(color);
+}
+
+async function submitForm(event) { // Função que envia o formulário (via fetch)
+    event.preventDefault();
+
+    const token = sessionStorage.getItem('editToken'); // Pega o token do usuário
+
+    // Se não houver token, a sessão provavelmente expirou (ou o usuário quer burlar)
+    if (!token) {
+        alert('Sessão expirada. Verifique sua senha novamente.');
+        return;
+    }
+
+    const at = document.querySelector('.userAt').textContent.replace('@', '');
+    const form = document.querySelector('form');
+
+    // Cria um formdata com os dados do formulário
+    const formData = new FormData(form);
+
+    // Monta o body no formato que o backend espera
+    const data = {
+        name: formData.get('name'),
+        pronouns: formData.get('pronouns'),
+        bio: formData.get('bio'),
+        color: formData.get('color'),
+        instagram: formData.get('instagram'),
+        linkedin: formData.get('linkedin'),
+        x: formData.get('x'),
+        github: formData.get('github'),
+        youtube: formData.get('youtube'),
+        discord: formData.get('discord'),
+        steam: formData.get('steam'),
+        facebook: formData.get('facebook'),
+        tiktok: formData.get('tiktok'),
+        links: JSON.parse(formData.get('customLinks') || '[]')
+    };
+
+    try { // Tenta fazer uma requisição PUT
+        const response = await fetch(`http://localhost:3000/user/${at}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}` // Envia o token do SessionStorage
+            },
+            body: JSON.stringify(data) // Envia os dados
+        });
+
+        if (response.ok) { // Se tiver respondido OK (true)
+            sessionStorage.removeItem('editToken'); // Remove o token
+            window.location.reload(); // recarrega a página com os dados novos
+        } else if (response.status == 401 || response.status == 403) { // Se tiver respondido mal (erro)
+            sessionStorage.removeItem('editToken'); // Remove o token
+            alert('Sem permissão. Verifique sua senha novamente.'); // Alerta que não há permissão
+        } else { // Qualquer outra coisa (como false)
+            alert('Erro ao salvar as alterações.'); // Retorna erro
+        }
+    } catch (error) { // Caso dê erro no fetch
+        console.error('Erro ao enviar formulário:', error); // Mostra o erro no console
+        alert('Erro de conexão com o servidor!'); // Alerta erro
+    }
 }
 
 // =================================================
@@ -355,8 +415,8 @@ function submitEvent() { // Adiciona evento para enviar o formulário de ediçã
     const saveBtn = document.getElementById('saveEdit');
 
     saveBtn.addEventListener('click', () => {
-        document.querySelector('form').submit();
-    })
+        submitForm(event);
+    });
 }
 
 function colorsEvents() { // Adiciona os event listeners nas cores
@@ -393,5 +453,5 @@ document.addEventListener('DOMContentLoaded', () => {
     reset(); // Chama a função de reset
     animation(); // Chama a função de animação
 
-    allEvents();
+    allEvents(); // Configura todos os event listeners
 })

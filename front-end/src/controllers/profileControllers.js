@@ -28,20 +28,7 @@ async function getUser(req, res, at) {
     }
 }
 
-// Função de controle de atualizar dados do usuário
-async function updateUser(req, res, at, bodyData) {
-    try { // Tenta chamar o serviço de atualizar usuário
-        const response = await services.updateUser(at, bodyData); // Atualiza o usuário
-    
-        return res.redirect(`/u/${at}`); // Redireciona (atualiza a página)
-    } catch (error) { // Caso o fetch dê erro...
-        console.error("Erro no Controller [updateUser]:", error);
-        return res.status(500).json({ "erro": "Erro interno do back-end!" });
-    }
-}
-
 // Exporta as funções
 export {
-    getUser,
-    updateUser
+    getUser
 }

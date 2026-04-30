@@ -10,13 +10,5 @@ router.get('/:at', async (req, res) => {
     await controllers.getUser(req, res, at); // Pega os dados do usuário
 });
 
-// Rota com método POST (para edição de dados)
-router.post('/:at', (req, res) => {
-    const at = req.params.at;
-    const bodyData = req.body;
-
-    controllers.updateUser(req, res, at, bodyData);
-})
-
 // Exporta o router para ser usado no app.js
 export default router;

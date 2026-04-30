@@ -33,46 +33,7 @@ async function getUser(at) {
     
 }
 
-// Função de lógica de atualização de dados do usuário
-async function updateUser(at, bodyData) {
-    try { // Tenta atualiza fazer um fetch para atualizar os dados
-        const parsedLinks = bodyData.customLinks ? JSON.parse(bodyData.customLinks) : []; 
-        
-        const data = { // Dados formatados
-            name: bodyData.name,
-            pronouns: bodyData.pronouns,
-            bio: bodyData.bio,
-            color: bodyData.color,
-            instagram: bodyData.instagram,
-            linkedin: bodyData.linkedin,
-            x: bodyData.x,
-            github: bodyData.github,
-            youtube: bodyData.youtube,
-            discord: bodyData.discord,
-            steam: bodyData.steam,
-            facebook: bodyData.facebook,
-            tiktok: bodyData.tiktok,
-            links: parsedLinks
-        }
-
-        const response = await fetch(`http://localhost:3000/user/${at}`, {
-            method: "PUT",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(data)
-        });
-
-        return response.ok; // Retorna a resposta
-    } catch (error) { // Caso dê erro no fetch, mostra o erro e joga ela para o controller
-        console.error("Erro no Service [updateUser] ao tentar fazer fetch:", error);
-
-        throw error;
-    }
-}
-
 // Exporta as funções
 export {
-    getUser,
-    updateUser
+    getUser
 }

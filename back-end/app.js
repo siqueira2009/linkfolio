@@ -1,3 +1,5 @@
+// Importa as dependências
+import 'dotenv/config';
 import express from 'express';
 import cors from 'cors';
 
@@ -9,7 +11,10 @@ import authRouter from './src/routes/authRoutes.js'
 const app = express();
 
 // Define algumas coisas
-app.use(cors({ origin: 'http://localhost:3001' })); // Permite que 'localhost:3001' acesse a API
+app.use(cors({ // Permite que 'localhost:3001' acesse a API
+    origin: ['http://localhost:3001', 'http://127.0.0.1:3001'],
+    allowedHeaders: ['Content-Type', 'Authorization']
+}));
 app.use(express.json()); // Permite a leitura de bodies JSON
 app.use(express.urlencoded({ extended: true })); // Permite a leitura de bodies HTML
 

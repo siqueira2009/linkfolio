@@ -72,6 +72,9 @@ function updateClicks(at) {
 // Função para atualizar dados do usuário com arromba passado
 function updateUser(at, bodyData) {
     const neededUserIndex = users.findIndex(u => u.at == at); 
+
+    if (neededUserIndex == -1) return null;
+
     const user  = users.find(u => u.at == at);
     const userId = user.id;
     const userPassword = user.password;

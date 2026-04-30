@@ -9,6 +9,8 @@ async function verifyPassword(at, password) {
         const users = JSON.parse(fs.readFileSync(jsonUsersPath)); // Dados do JSON
         const user = users.find(u => u.at == at); // Usuário do arroba
 
+        if (!user) return false; // Retorna falso se não existir usuário
+
         // Vê se é igual
         // TRUE = IGUAL
         // FALSE = DIFERENTE

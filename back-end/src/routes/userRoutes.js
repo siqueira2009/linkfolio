@@ -1,6 +1,7 @@
 import express from 'express';
 import * as controllers from '../controllers/userControllers.js'; // Importa as funções de controle
 import hashPassword from '../middlewares/auth.js'; // Importa o middleware de hashear senha
+import requireOwner from '../middlewares/owner.js'; // Importa o middleware de verificar token
 
 const router = express.Router(); // Cria um Router
 
@@ -26,7 +27,7 @@ router.put('/:at/views', (req, res) => {
 });
 
 // Rota para atualizar demais dados do usuário
-router.put('/:at', (req, res) => {
+router.put('/:at', requireOwner, (req, res) => {
     const bodyData = req.body;
     const at = req.params.at;
 
@@ -41,7 +42,7 @@ router.post('/', hashPassword, (req, res) => {
 });
 
 // Rota para deletar usuário
-router.delete('/:at', (req, res) => {
+router.delete('/:at', requireOwner, (req, res) => {
     const at = req.params.at;
 
     controllers.deleteUser(req, res, at);
