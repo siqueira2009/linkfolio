@@ -15,7 +15,7 @@ services:
       - FRONTEND_URL=${FRONTEND_URL}
   
   frontend:
-    image: siqueira2009/linkfolio-frontend:v1.6
+    image: siqueira2009/linkfolio-frontend:v1.7
     container_name: frontend
     ports:
       - "3001:3001"
