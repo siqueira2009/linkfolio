@@ -44,7 +44,8 @@ function reset() { // Função que reseta a página (inputs etc.)
 // =================================================
 
 class Link { // Classe de LINK
-    constructor(name, url, emoji, bio) {
+    constructor(id, name, url, emoji, bio) {
+        this.id = id,
         this.name = name,
         this.url = url,
         this.emoji = emoji,
@@ -172,7 +173,7 @@ function verifyFields() { // Função que verifica os campos (se estão vazios/v
             if (selectedEmoji ==  true) {
                 
                 addButton.removeAttribute('disabled');
-                selectColor = false;
+                selectedEmoji = false;
             } else {
                 addButton.setAttribute('disabled', 'true');
             }
@@ -272,10 +273,13 @@ function addLink() { // Função para adicionar links
 
     
     if (name.value != "" && url.value != "" && emoji.value != "") {
-        const newLinks = new Link(name.value, url.value, emoji.value, bio.value);
+        const newId = 'id-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+
+        const newLinks = new Link(newId, name.value, url.value, emoji.value, bio.value);
         customLinksArray.push(newLinks)
         let templateLink = document.getElementById('customLinkTemplate');
         let customLink = templateLink.cloneNode(true);
+        customLink.dataset.id = newId;
         customLink.style.display = ''
 
         let linkName = customLink.querySelector('label')
@@ -309,11 +313,22 @@ function addLink() { // Função para adicionar links
     }
 }
 
-function removeLink() { // Função para remover links
-    const father = btn.closest('.inputGroup');
+function removeLink(event) { // Função para remover links
+    const father = event.target.closest('.inputGroup');
+    const id = father.dataset.id;
+
+    const linkIndex = customLinksArray.findIndex(l => l.id == id);
+
+    if (linkIndex == -1) {
+        console.error('Link não encontrado');
+        return;
+    }
+    
+    customLinksArray.splice(linkIndex, 1);
+    document.getElementById('customLinksInput').value = JSON.stringify(customLinksArray);
+
     father.remove();
     totalCustomLinks--;
-
     showEmptyLinksMessage();
 }
 

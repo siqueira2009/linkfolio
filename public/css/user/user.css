@@ -20,6 +20,8 @@ body {
     background: radial-gradient(ellipse at top, #0f0f1a 0%, #0a0a0f 60%);
 
     padding: 30px;
+    padding-bottom: 0px;
+    overflow: hidden;
 }
 
 body::before {
@@ -225,16 +227,29 @@ body:has(main#color-yellow) .bgModified, body:has(main#color-yellow) .bgModified
 main {
     display: flex;
     flex-direction: column;
-    justify-content: top;
+    justify-content: start;
     align-items: center;
     gap: 20px;
+    overflow-x: hidden;
 
     width: 28%;
     height: 90%;
 
     background-color: transparent;
     position: relative;
-    z-index: 1; /* fica acima dos glows do body */
+    z-index: 1;
+    scrollbar-color: #8080802e transparent;
+    scrollbar-width: thin;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #8080802e; 
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: transparent;
+  border-radius: 10px;
 }
 
 main::before {

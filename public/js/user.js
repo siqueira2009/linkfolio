@@ -2,6 +2,8 @@
 // 0️⃣ FUNÇÕES DE INTERFACE E RESET
 // =================================================
 
+let pickedEmoji = false; // Variável que guarda se já escolheu emoji no modal de edição
+
 function animation() { // Função que anima o carregamento da página
     const main = document.querySelector('main');
     const body = document.querySelector('body');
@@ -23,7 +25,15 @@ function animation() { // Função que anima o carregamento da página
 }
 
 function reset() { // Função que reseta a página (inputs etc.)
-    lucide.createIcons();
+    const linkInputs = document.getElementById('addLinks').querySelectorAll('input');
+
+    linkInputs.forEach(input => {
+        input.value = "";
+    });
+
+    pickedEmoji = false;
+
+    verifyFieldsLinks();
 }
 
 // =================================================
@@ -42,7 +52,6 @@ const socialColors = { // Objeto que guarda as cores das redes sociais
   "TikTok": "#EE1D52"
 };
 
-let pickedEmoji = false; // Variável que guarda se já escolheu emoji no modal de edição
 let customLinksArray = JSON.parse(document.getElementById('customLinksInput').value); // Array com os links existentes
 
 function socialColorsEnter(btn) { // Função que coloca cor no ícone e texto da rede social
@@ -113,40 +122,34 @@ async function updateInfo() { // Função que atualiza as informações (Cliques
     }
 }
 
-function closeModal() { // Função que fecha o modal de adicionar link personalizado
-    const addButton = document.getElementById('addLink');
-    const dialog = document.querySelector('dialog');
+function closeModal() { // Função que fecha o modal de editar perfil
+    window.location.reload(); // recarrega a página mantendo os dados antigos
 
-    const sections = document.querySelectorAll('section');
-
-    sections.forEach(section => section.style.filter = 'blur(0px)');
-    
-    dialog.style.marginTop = '1000px';
-
-    setTimeout(() => {
-        dialog.setAttribute('open', 'false');
-        dialog.style.marginTop = '';
-    }, 400)
-
-    addButton.setAttribute('disabled', 'true')
 }
 
-function removeLink(event) { // Função que remove links na parte de edição
-    const target = event.target;
-    const parent = target.closest('.editLink');
-    const name = parent.querySelector('.title');
+function removeLink(event) {
+    const parent = event.target.closest('.editLink');
+    const id = parent.dataset.id;
 
-    const linkIndex = customLinksArray.findIndex(l => l.name == name);
+    const linkIndex = customLinksArray.findIndex(l => l.id == id);
+
+    if (linkIndex == -1) {
+        console.error('Link não encontrado');
+        return;
+    }
 
     customLinksArray.splice(linkIndex, 1);
-    const customLinksInput = document.getElementById('customLinksInput');
-    customLinksInput.value = JSON.stringify(customLinksArray)
+
+    document.getElementById('customLinksInput').value = JSON.stringify(customLinksArray);
 
     parent.remove();
 }
 
 function addLink(name, url, emoji, bio) { // Função que adiciona links na parte de edição
+    const newId = 'id-' + Date.now() + '-' + Math.random().toString(16).slice(2);
+    
     const newLink = {
+        "id": newId,
         "name": name,
         "url": url,
         "emoji": emoji,
@@ -155,6 +158,7 @@ function addLink(name, url, emoji, bio) { // Função que adiciona links na part
 
     const linksParent = document.getElementById('editLinks');
     const newLinkElement = document.createElement('a');
+    newLinkElement.dataset.id = newLink.id;
     newLinkElement.classList.add('link')
     newLinkElement.classList.add('editLink')
     newLinkElement.innerHTML = 
@@ -162,9 +166,9 @@ function addLink(name, url, emoji, bio) { // Função que adiciona links na part
         <div class="linkIcon bgModified">${emoji}</div>
         <div class="linkText">
             <h2 class="title">${name}</h2>
-            <p class="subtitle">${bio}<p>
+            <p class="subtitle">${bio}</p>
         </div>
-        <svg class="removeLinkIcon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true" class="lucide lucide-x removeLink"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
+        <svg class="removeLinkIcon lucide lucide-x removeLink" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x" aria-hidden="true"><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg>
     `
     editLinks.appendChild(newLinkElement);
     removeLinksEvent(newLinkElement);
@@ -174,22 +178,20 @@ function addLink(name, url, emoji, bio) { // Função que adiciona links na part
     customLinksInput.value = JSON.stringify(customLinksArray);
 }
 
-function verifyFieldsLinks() { // Função que verifica os inputs de links
+function verifyFieldsLinks() {
     const inputs = document.querySelectorAll('#addLinks input.required');
-    let allValid = false;
+    let allValid = true;
 
     for (let i = 0; i < inputs.length; i++) {
-        if (inputs[i].value == "") {
+        if (inputs[i].value === "") {
             allValid = false;
             break;
-        } else {
-            allValid = true;
         }
     }
 
     const addBtn = document.getElementById('addLink');
 
-    if (allValid == true && pickedEmoji == true) {
+    if (allValid && pickedEmoji) {
         addBtn.removeAttribute('disabled');
     } else {
         addBtn.setAttribute('disabled', 'true');
@@ -198,6 +200,7 @@ function verifyFieldsLinks() { // Função que verifica os inputs de links
 
 async function verifyPassword() { // Função que pede a senha na hora de editar perfil
     function openModal() { // Função que abre o modal de adicionar link personalizado
+        const main = document.querySelector('main');
         const sections = document.querySelectorAll('section');
 
         sections.forEach(section => section.style.filter = 'blur(2px)');
@@ -208,6 +211,7 @@ async function verifyPassword() { // Função que pede a senha na hora de editar
         
         setTimeout(() => {
             dialog.style.marginTop = '0px'
+            main.style.overflow = 'unset'
         }, 200)
     }
 
@@ -217,7 +221,7 @@ async function verifyPassword() { // Função que pede a senha na hora de editar
     if (!password) {
         return;
     }
-
+    
     const response = await fetch(`${window.BACKEND_URL}/auth/password/${at}`, {
         method: "POST",
         headers: {
@@ -335,7 +339,7 @@ function editEvent() { // Adiciona os event listeners no botão de abrir modal
 }
 
 function clickEvents() { // Adiciona os eventos ao clicar em algum link (a), para atualiza o campo de cliques
-    const a = document.querySelectorAll('a');
+    const a = document.querySelectorAll('.clickIncrementer');
 
     a.forEach(a => {
         a.addEventListener('click', clickUpdater);
@@ -387,6 +391,7 @@ function addLinkEvent() { // Adiciona evento para adicionar link na aba de ediç
 
     addLinkBtn.addEventListener('click', () => {
         addLink(name.value, url.value, emoji.value, bio.value);
+        reset();
     })
 }
 
@@ -450,6 +455,7 @@ function allEvents() { // Chama todas elas aqui dentro (menos a de remover link,
 // =================================================
 
 document.addEventListener('DOMContentLoaded', () => {
+    lucide.createIcons(); // Cria os ícones Lucide
     reset(); // Chama a função de reset
     animation(); // Chama a função de animação
 

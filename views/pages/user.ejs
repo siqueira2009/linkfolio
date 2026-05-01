@@ -17,7 +17,7 @@
     </div>
 
     <!-- CONTEÚDO PRINCIPAL DA PÁGINA -->
-    <main id="color-<%=user.color%>">
+    <main style="overflow: scroll;" id="color-<%=user.color%>">
         <!-- Seção do perfil (foto, nome, arroba e sobre) -->
         <section id="profile">
             <h1 class="userIcon bgModified"><%= user.firstLetters %></h1>
@@ -59,7 +59,7 @@
                 <% let totalSocials = socials.length %>
                 <% for (let i = 0; i < 9; i++) { %>
                     <% if (user[socials[i]] != "") { %>
-                        <a class="socialMedia" href="<%= socialUrls[i] %><%= user[socials[i]]%>" target="_blank" rel="noopener noreferrer">
+                        <a class="socialMedia clickIncrementer" href="<%= socialUrls[i] %><%= user[socials[i]]%>" target="_blank" rel="noopener noreferrer">
                             <i class="fa-brands <%= socialLogos[i] %>"></i>
                             <p><%= socials[i]%></p>
                         </a>
@@ -78,7 +78,7 @@
             <div id="linksContainer">
                 <% let totalLinks = user.links.length %>
                 <% for (let i = 0; i < user.links.length; i++) {%>
-                <a class="link" href="http://<%= user.links[i].url %>" target="_blank" rel="noopener noreferrer">
+                <a class="link clickIncrementer" href="http://<%= user.links[i].url %>" target="_blank" rel="noopener noreferrer">
                     <div class="linkIcon bgModified"><%= user.links[i].emoji %></div>
                     <div class="linkText">
                         <h2 class="title"><%= user.links[i].name %></h2>
@@ -98,7 +98,7 @@
         <i class="bgModifiedHover" id="editProfile" data-lucide="sliders-horizontal"></i>
 
         <!-- MODAL COM OPÇÕES DE EDIÇÃO -->
-        <dialog open="false">
+        <dialog>
             <h1>Editar perfil</h1>
                     
             <form method="POST">
@@ -209,7 +209,7 @@
                 <p class="topic" style="margin-top: 16px;"><span class="colorModified">Links</span> atuais</p>
                 <div id="editLinks">
                     <% for (let i = 0; i < user.links.length; i++) { %>
-                        <a class="link editLink">
+                        <a class="link editLink" data-id="<%= user.links[i].id %>">
                             <div class="linkIcon bgModified"><%= user.links[i].emoji %></div>
                             <div class="linkText">
                                 <h2 class="title"><%= user.links[i].name %></h2>
