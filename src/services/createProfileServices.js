@@ -1,5 +1,5 @@
 // Pega a URL do backend nas variáveis do sistema
-const BACKEND_URL = process.env.BACKEND_URL;
+const BACKEND_URL_PUBLIC = process.env.BACKEND_URL_PUBLIC;
 
 // Função de lógica de criação de perfil
 async function createProfile(bodyData) {
@@ -26,7 +26,7 @@ async function createProfile(bodyData) {
         }
         
         // Fetch na rota de salvar dados
-        const response = await fetch(`${BACKEND_URL}/user`, {
+        const response = await fetch(`${BACKEND_URL_PUBLIC}/user`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

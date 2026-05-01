@@ -321,7 +321,7 @@ async function verifyAt() { // Função que verifica se o arroba digitado já ex
     const atInput = document.getElementById('atInput');
     const at = atInput.value;
 
-    const user = await fetch(`http://localhost:3000/user/${at}`, {
+    const user = await fetch(`${window.BACKEND_URL}/user/${at}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
