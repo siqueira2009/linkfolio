@@ -1,4 +1,3 @@
 /node_modules
-/back-end/node_modules
-/back-end/src/data
-/back-end/.env
+/src/data
+.env
